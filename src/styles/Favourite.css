@@ -1,0 +1,40 @@
+.favourites-page {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+}
+
+.favourite-item {
+    display: flex;
+    width: 500px;
+    height: 106px;
+    border: 3px dashed teal;
+    margin-bottom: 15px;
+}
+
+.item-favourite-photo {
+    width: 100px;
+    height: 100px;
+    background-color: black;
+    resize: none;
+}
+
+.item-favourite-info-container {
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    height: 100%;
+    margin-top: 10px;
+}
+
+.item-favourite-title {
+    width: fit-content;
+    margin-left: 10px;
+}
+
+.item-favourite-price {
+    width: fit-content;
+    margin-right: 10px;
+}

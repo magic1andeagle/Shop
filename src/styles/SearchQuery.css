@@ -1,0 +1,24 @@
+.search-query {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(202, 196, 196);
+    margin-left: 25px;
+    width: 750px;
+    height: 48px;
+    align-items: center;
+}
+
+.search-query-input {
+    width: 750px;
+    height: 48px;
+    background-color: rgb(202, 196, 196);
+    outline: none;
+    border: none;
+    
+}
+
+.search-query-magnifier {
+    height: 70%;
+    margin-right: 10px;
+    cursor: pointer;
+}
