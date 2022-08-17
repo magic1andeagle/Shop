@@ -8,7 +8,7 @@ const SearchQuery = () => {
     return (
         <div className='search-query'>
             <input value={value} onChange={e => setValue(e.target.value)} className='search-query-input' placeholder='Search for anything'></input>
-            <img className='search-query-magnifier' src={magnifier}></img>
+            <img onClick={() => setValue('')} className='search-query-magnifier' src={magnifier}></img>
         </div>
     );
 }

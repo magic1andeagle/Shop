@@ -1,11 +1,19 @@
-body {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
   font-family: "Montserrat", sans-serif;
   background: #E5E5E5;
 }
 
 button {
   font-family: "Montserrat", sans-serif;
+}
+
+wrapper {
+  width: 1140px;
+  min-height: 100vh;
 }

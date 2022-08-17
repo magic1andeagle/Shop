@@ -6,32 +6,34 @@ import SearchQuery from "./SearchQuery";
 const Navbar = () => {
   return (
     <div className="navbar">
-      <Link
-      className="title"
-      to='/'
-      style={{ textDecoration: "none", color: 'gold', fontSize: 34, paddingLeft: 30 }}
-      >DAILYSHOP</Link>
-      <SearchQuery />
+      <div className="navbar-left-container">
+        <Link
+          className="title"
+          to="/"
+          style={{
+            textDecoration: "none",
+            color: "gold",
+            fontSize: 34,
+            paddingLeft: 20,
+          }}
+        >
+          DAILYSHOP
+        </Link>
+        <SearchQuery />
+      </div>
+
       <div className="navbar__links_container">
-        <Link 
-          className="navbar-link" 
-          to="/" 
-          style={{ textDecoration: "none" }}
-          >
+        <Link className="navbar-link" to="/" style={{ textDecoration: "none" }}>
           Sign in
         </Link>
-        <a 
-          className="navbar-link" 
-          href="#" 
-          style={{ textDecoration: "none" }}
-          >
+        <a className="navbar-link" href="#" style={{ textDecoration: "none" }}>
           Country
         </a>
-        <Link 
-          className="navbar-link" 
-          to='/favourites'
+        <Link
+          className="navbar-link"
+          to="/favourites"
           style={{ textDecoration: "none" }}
-          >
+        >
           Favourites
         </Link>
         <Link
