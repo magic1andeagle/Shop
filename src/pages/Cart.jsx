@@ -1,13 +1,15 @@
-import { observe, toJS } from "mobx";
 import React, { useEffect, useRef, useState } from "react";
 import ItemState from "../Components/States/ItemState";
-import styles from "../styles/Cart.css";
-import Counter from "../Components/Counter";
 import CartItem from "../Components/CartItem";
 import { observer } from "mobx-react-lite";
 
+import { Context } from "../context/context";
+import { useContext } from "react";
+
+import "../styles/Cart.css";
+
 const Cart = observer(() => {
-  
+  const values = useContext(Context)
 
   return (
     <div className="cart">

@@ -1,8 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import FavouriteItem from "../Components/FavouriteItem";
-import styles from "../styles/Favourite.css";
 import ItemState from "../Components/States/ItemState";
+
+import "../styles/Favourite.css";
 
 const Favourites = () => {
   const [favouriteItems, setFavouriteItems] = useState(
