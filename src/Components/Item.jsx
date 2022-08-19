@@ -10,13 +10,17 @@ const Item = ({ title, price, id, initialPrice, quantity }) => {
         <h3>{price}p</h3>
         <div className="button-wrapper">
           <button
+            className="item-button"
             onClick={() =>
               ItemState.addToCart(id, price, initialPrice, quantity)
             }
           >
             Add to cart
           </button>
-          <button onClick={() => ItemState.addToFavourite(id)}>
+          <button
+            className="item-button"
+            onClick={() => ItemState.addToFavourite(id)}
+          >
             Favourites
           </button>
         </div>

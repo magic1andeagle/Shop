@@ -1,17 +1,16 @@
 .search-query {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
 
-    width: 200px;
+    width: 150px;
     height: 48px;
     background: transparent;
 
-    margin-left: 25px;
 }
 
 .search-query-input {
     display: flex;
+    width: 150px;
 
     background: transparent;
     border: none;
@@ -28,10 +27,6 @@
     color: #E5E5E5;
     font-size: 14px;
     font-weight: 600;
-}
-
-.search-query-input:blur {
-    color: white;
 }
 
 .search-query-magnifier {

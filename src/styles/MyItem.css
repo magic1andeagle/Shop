@@ -1,10 +1,12 @@
-.items-main {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
+.items-container {
+    width: 1140px;
+    display: flex; 
     margin-top: 30px;
-    padding-left: 10px;
+}
+
+.items-main {
+    display: flex;
+    flex-wrap: wrap; 
 }
 
 .item {
@@ -12,7 +14,8 @@
     display: block;
     width: 285px;
     height: 295px;
-    border: 1px solid teal;
+    border: 1px solid rgb(78,17,122);
+    border-radius: 4px;
     margin-right: 20px;
     margin-bottom: 40px;
 }
@@ -25,7 +28,6 @@
     align-items: stretch;
     justify-content: flex-start;
     text-align: center;
-    
 }
 
 
@@ -35,14 +37,26 @@
     margin-bottom: 10px;
 }
 
-.item-info-container button {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
+.item-button {
+    width: 120px;
+    height: 50px;
+    border-radius: 12px;
 
     background-color: transparent;
-    border: 3px solid rgb(93, 83, 185);
+    border: 1px solid rgb(78,17,122);
     outline: none;
+    box-shadow: inset 0 0 0 0 #4E117A;
+    transition: ease-out 0.25s;
+
+    font-size: 16px;
+    text-align: center;
+}
+
+.item-button:hover {
+    color: #F5C240;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    box-shadow: inset 120px 0 0 0 #4E117A;
 }
 
 .button-wrapper {
@@ -60,4 +74,11 @@
 
 .post__btns {
     display: flex;
+}
+
+.items-categories {
+    display: flex;
+    width: 425px;
+    height: 600px;
+    background-color: gray;
 }
