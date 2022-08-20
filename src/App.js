@@ -5,18 +5,18 @@ import AppRouter from "../src/Components/Router/AppRouter";
 import Navbar from "../src/Components/Navbar";
 
 import "../src/styles/App.css";
-import { Context } from "./context/context";
+import { sportItemsContext } from "./context/context";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Context.Provider value={Context}>
+    <sportItemsContext.Provider value={sportItemsContext._currentValue}>
+      <BrowserRouter>
         <wrapper>
           <Navbar />
           <AppRouter />
         </wrapper>
-      </Context.Provider>
-    </BrowserRouter>
+      </BrowserRouter>
+    </sportItemsContext.Provider>
   );
 }
 

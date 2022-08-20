@@ -1,7 +1,10 @@
 import React from "react";
 import ItemState from "../Components/States/ItemState";
+import CartState from "./States/CartState";
 
-const Item = ({ title, price, id, initialPrice, quantity }) => {
+const Item = ({ data }) => {
+  const { title, price, id, initialPrice, quantity } = data
+
   return (
     <div className="item">
       <div className="item-info-container">
@@ -12,7 +15,7 @@ const Item = ({ title, price, id, initialPrice, quantity }) => {
           <button
             className="item-button"
             onClick={() =>
-              ItemState.addToCart(id, price, initialPrice, quantity)
+              CartState.addToCart(data)
             }
           >
             Add to cart

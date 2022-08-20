@@ -3,23 +3,23 @@ import ItemState from "../Components/States/ItemState";
 import CartItem from "../Components/CartItem";
 import { observer } from "mobx-react-lite";
 
-import { Context } from "../context/context";
+import { sportItemsContext } from "../context/context";
 import { useContext } from "react";
 
 import "../styles/Cart.css";
+import CartState from "../Components/States/CartState";
 
-const Cart = observer(() => {
-  const values = useContext(Context)
+const Cart = () => {
+  const values = useContext(sportItemsContext)
+  console.log(values)
 
   return (
     <div className="cart">
       <div className="cart-container">
         <div className="cart-main-section">
           <h1 style={{ marginBottom: "30px" }}>Your cart:</h1>
-          {ItemState.cartItems.map((item) => (
-            <CartItem
-              key={item.id}
-              id={item.id}
+          {CartState.cartItems.map((item) => (
+            <CartItem key={item.id} id={item.id}
             />
           ))}
         </div>
@@ -35,6 +35,6 @@ const Cart = observer(() => {
       </div>
     </div>
   );
-});
+};
 
 export default Cart;

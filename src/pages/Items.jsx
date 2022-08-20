@@ -1,23 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Item from "../Components/Item";
 import ItemState from "../Components/States/ItemState";
+import { sportItemsContext } from "../context/context";
 
 import "../styles/MyItem.css";
 
 function Items() {
-  const [values, setValue] = useState(ItemState.items);
+  const items = useContext(sportItemsContext);
 
   return (
-    <div style={{display: 'flex'}} className="items-container">
+    <div style={{ display: "flex" }} className="items-container">
       <div className="items-main">
-        {values.map((value) => (
+        {Object.entries(items).map((value) => (
           <Item
-            key={value.id}
-            title={value.title}
-            price={value.price}
-            id={value.id}
-            initialPrice={value.initialPrice}
-            quantity={value.quantity}
+            key={value[1].id}
+            data={value[1]}
           />
         ))}
       </div>
