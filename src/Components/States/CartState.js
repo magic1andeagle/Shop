@@ -1,5 +1,11 @@
+import { makeAutoObservable } from "mobx"
+
 class CartState {
     cartItems = []
+
+    constructor() {
+        makeAutoObservable(this)
+    }
 
     addToCart(data) {
         if (this.cartItems.find(item => item.id == data.id)) {
@@ -11,9 +17,9 @@ class CartState {
     }
 
     removeFromCart(id) {
-        this.cartItems.filter((item) => {
-            return item.id !== id
-        })
+        let index = this.cartItems.findIndex((item) => item.id == id)
+        this.cartItems.splice(index, 1)
+        console.log(this.cartItems)
     }
 
     removeAllCart() {

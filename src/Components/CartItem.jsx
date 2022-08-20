@@ -20,10 +20,10 @@ const CartItem = observer(({ id }) => {
       <div className="item-cart-info-container">
         <div className="item-cart-title">{CartState.cartItems.find((item) => item.id == id).title}</div>
         <div className="item-cart-price">
-          {CartState.cartItems.find((item) => item.id == id).title.price}
+          {CartState.cartItems.find((item) => item.id == id).price}
         </div>
       </div>
-      <div onClick={() => ItemState.deleteFromCart()} className="delete-cart-item-button">X</div>
+      <div onClick={() => CartState.removeFromCart(id)} className="delete-cart-item-button">X</div>
     </div>
   );
 });

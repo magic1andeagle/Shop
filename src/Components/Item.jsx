@@ -1,6 +1,7 @@
 import React from "react";
 import ItemState from "../Components/States/ItemState";
 import CartState from "./States/CartState";
+import FavouritesState from "./States/FavouritesState";
 
 const Item = ({ data }) => {
   const { title, price, id, initialPrice, quantity } = data
@@ -22,7 +23,7 @@ const Item = ({ data }) => {
           </button>
           <button
             className="item-button"
-            onClick={() => ItemState.addToFavourite(id)}
+            onClick={() => FavouritesState.addFavourite(data)}
           >
             Favourites
           </button>

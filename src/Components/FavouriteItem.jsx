@@ -1,25 +1,21 @@
 import React from "react";
+import FavouritesState from "./States/FavouritesState";
 import ItemState from "./States/ItemState";
 
-const FavouriteItem = ({ id, setState, state }) => {
-
-  const deleteItem = () => {
-    ItemState.deleteFromFavourites(id);
-    setState(state.filter((item) => item !== id))
-  };
+const FavouriteItem = ({ id }) => {
 
   return (
     <div className="favourite-item">
       <div className="item-favourite-photo"></div>
       <div className="item-favourite-info-container">
         <div className="item-favourite-title">
-          {ItemState.items[id - 1].title}
+          {FavouritesState.favouriteItems.find((item) => item.id == id).title}
         </div>
-        <div onClick={deleteItem} className="delete-fav-button">
+        <div onClick={() => FavouritesState.removeFavourite(id)} className="delete-fav-button">
           ❤
         </div>
         <div className="item-favourite-price">
-          {ItemState.items[id - 1].price}
+          {FavouritesState.favouriteItems.find((item) => item.id == id).price}
         </div>
       </div>
     </div>

@@ -9,7 +9,7 @@ import { useContext } from "react";
 import "../styles/Cart.css";
 import CartState from "../Components/States/CartState";
 
-const Cart = () => {
+const Cart = observer(() => {
   const values = useContext(sportItemsContext)
   console.log(values)
 
@@ -30,11 +30,12 @@ const Cart = () => {
           >
             Total value:
             <h1 className="cart-total-value-num">{ItemState.totalCartValue}</h1>
+            <button onClick={() => CartState.removeAllCart()}>Remove All</button>
           </div>
         </div>
       </div>
     </div>
   );
-};
+});
 
 export default Cart;
