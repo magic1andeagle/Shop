@@ -13,7 +13,7 @@ button {
   font-family: "Montserrat", sans-serif;
 }
 
-wrapper {
+.wrapper {
   width: 1140px;
   min-height: 100vh;
   margin: 0 auto;

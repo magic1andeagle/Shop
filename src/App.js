@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "../src/Components/Router/AppRouter";
+
 import Navbar from "../src/Components/Navbar";
 
 import "../src/styles/App.css";
@@ -11,10 +12,10 @@ function App() {
   return (
     <sportItemsContext.Provider value={sportItemsContext._currentValue}>
       <BrowserRouter>
-        <wrapper>
+        <div className="wrapper">
           <Navbar />
           <AppRouter />
-        </wrapper>
+        </div>
       </BrowserRouter>
     </sportItemsContext.Provider>
   );

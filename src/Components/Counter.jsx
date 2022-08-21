@@ -1,20 +1,27 @@
-import React from "react";
-import { useState } from "react";
-import ItemState from "./States/ItemState";
+import React, { useContext, useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
+import CartState from "./States/CartState";
 
-const Counter = observer(({ id, setInitialQuantity }) => {
-  const [counterValue, setCounterValue] = useState(1);
-
-  const index = ItemState.cartItems.findIndex((item) => item.id == id)
+const Counter = observer(({ getNum, id, data }) => {
+  const [counterValue, setCounterValue] = useState(1)
 
   const increment = (id) => {
-    ItemState.increment(id)
-    ItemState.changePrice(id)
-  };
+    setCounterValue(prev => prev + 1)
+    CartState.incrQuantity(id)
+  }
+
   const decrement = (id) => {
-    ItemState.decrement(id)
-  };
+    if (counterValue - 1 == 0) {
+      CartState.removeFromCart(id, Object.entries(data))
+      return
+    }
+    setCounterValue(prev => prev - 1)
+    CartState.decrQuantity(id)
+  }
+
+  useEffect(() => {
+    getNum(counterValue)
+  }, [increment, decrement])
 
   return (
     <div className="item-cart-counter">
@@ -22,7 +29,7 @@ const Counter = observer(({ id, setInitialQuantity }) => {
         <div onClick={() => decrement(id)} className="counter-button-decrement">
           -
         </div>
-        <div className="item-cart-counter-value">{ItemState.cartItems[index].quantity}</div>
+        <div className="item-cart-counter-value">{counterValue}</div>
         <div onClick={() => increment(id)} className="counter-button-increment">
           +
         </div>
