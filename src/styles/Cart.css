@@ -75,3 +75,9 @@
     margin-right: 30px;
     justify-content: space-between;
 }
+
+.delete-cart-item-button {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}

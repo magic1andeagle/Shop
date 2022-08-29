@@ -3,6 +3,7 @@ import ItemState from "../Components/States/ItemState";
 import styles from "../styles/Cart.css";
 import Counter from "../Components/Counter";
 import { observer } from "mobx-react-lite";
+import closeButton from '../img/cancel-close.svg'
 
 import CartState from "./States/CartState";
 import { sportItemsContext } from "../context/context";
@@ -35,7 +36,7 @@ const CartItem = observer(({ id }) => {
           {totalItemPrice}
         </div>
       </div>
-      <div onClick={() => CartState.removeFromCart(id, Object.entries(data))} className="delete-cart-item-button">X</div>
+      <img src={closeButton} onClick={() => CartState.removeFromCart(id, Object.entries(data))} className="delete-cart-item-button"></img>
     </div>
   );
 });
