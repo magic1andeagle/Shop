@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useFilter } from "../Components/hooks/useFilter";
+import { useSort } from "../Components/hooks/useSort";
 import Item from "../Components/Item";
-import ItemState from "../Components/States/ItemState";
 import { categoriesContext, sportItemsContext } from "../context/context";
 
 import "../styles/MyItem.css";
@@ -10,9 +11,11 @@ function Items() {
   const categories = useContext(categoriesContext);
 
   const [selectedCategory, setSelectedCategory] = useState([]);
-  const [selectedSort, setSelectedSort] = useState(null);
-
+  const [selectedSort, setSelectedSort] = useState("title");
   const [filteredSortedItems, setFilteredSortedItems] = useState([]);
+
+  const sortedItems = useSort(items, selectedSort);
+  const filteredItems = useFilter(sortedItems, selectedCategory);
 
   const setCategoryHandler = (e) => {
     if (selectedCategory.some((category) => category.value == e.target.value)) {
@@ -23,18 +26,12 @@ function Items() {
     }
     setSelectedCategory([...selectedCategory, { value: e.target.value }]);
   };
-
+  
   useEffect(() => {
-    setFilteredSortedItems(
-      items.filter((item) => {
-        if (
-          selectedCategory.some((category) => category.value == item.category)
-        ) {
-          return item;
-        }
-      })
-    );
-  }, [selectedCategory]);
+    selectedCategory.length
+      ? setFilteredSortedItems(filteredItems)
+      : setFilteredSortedItems(sortedItems);
+  }, [selectedCategory, selectedSort]);
 
   return (
     <div
@@ -42,11 +39,16 @@ function Items() {
       className="items-container"
     >
       <div className="sort-container">
-        <div className="custom-select" style={{ width: "200px" }}>
-          <select defaultValue='default'>
-            <option disabled value="default">Сортировка:</option>
+        <div className="custom-select">
+          <select
+            defaultValue={`default`}
+            onChange={(e) => setSelectedSort(e.target.value)}
+          >
+            <option disabled value="default">
+              Сортировка по:
+            </option>
             <option value="price">По цене</option>
-            <option value="name">По названию</option>
+            <option value="title">По названию</option>
           </select>
         </div>
       </div>
