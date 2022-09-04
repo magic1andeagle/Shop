@@ -1,4 +1,5 @@
 import React from "react";
+import ItemService from "../Components/API/ItemService";
 
 export const items = [
   {
@@ -55,3 +56,11 @@ export const categories = ["Велосипеды", "Самокаты", "Спор
 
 export const sportItemsContext = React.createContext(items);
 export const categoriesContext = React.createContext(categories)
+
+export const getItems = async () => {
+    const response = await ItemService.getItems()
+    console.log(response)
+    return response
+}
+
+export const newItemsContext = React.createContext(getItems())

@@ -9,6 +9,7 @@ import "../src/styles/App.css";
 import { sportItemsContext } from "./context/context";
 
 function App() {
+
   return (
     <sportItemsContext.Provider value={sportItemsContext._currentValue}>
       <BrowserRouter>
