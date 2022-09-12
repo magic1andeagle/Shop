@@ -4,31 +4,42 @@ import ItemService from "../Components/API/ItemService";
 import { useFilter } from "../Components/hooks/useFilter";
 import { useSort } from "../Components/hooks/useSort";
 import Item from "../Components/Item";
-import { categoriesContext, newItemsContext, sportItemsContext } from "../context/context";
+import {
+  categoriesContext,
+  newItemsContext,
+  sportItemsContext,
+} from "../context/context";
 
 import "../styles/MyItem.css";
 
 function Items() {
-  const [items, setItems] = useState([])
+  const [items, setItems] = useState([]);
+  const [categories, setCategories] = useState([])
 
-  const categories = useContext(categoriesContext)
-  const newItems = useContext(newItemsContext)
+  const getCategories = useContext(categoriesContext)
+  const getItems = useContext(newItemsContext);
 
   const getNewItems = async () => {
-    const result = await newItems
-    setItems([...result])
-  }
+    const result = await getItems;
+    setItems([...result]);
+  };
+
+  const setCats = async () => {
+    const result = await getCategories;
+    setCategories(result)
+  };
 
   useEffect(() => {
-    getNewItems()
-  }, [])
+    getNewItems();
+    setCats();
+  }, []);
 
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [selectedSort, setSelectedSort] = useState("title");
   const [filteredSortedItems, setFilteredSortedItems] = useState([]);
 
   const sortedItems = useSort(items, selectedSort);
-  const filteredItems = useFilter(sortedItems, selectedCategory);  
+  const filteredItems = useFilter(sortedItems, selectedCategory);
 
   const setCategoryHandler = (e) => {
     if (selectedCategory.some((category) => category.value == e.target.value)) {
@@ -80,7 +91,7 @@ function Items() {
             <div className="categories">
               {categories.map((category) => {
                 return (
-                  <div className="category">
+                  <div key={category} className="category">
                     <label htmlFor={category}>
                       <input
                         onClick={(e) => setCategoryHandler(e)}
@@ -90,7 +101,7 @@ function Items() {
                         value={category}
                         style={{ marginRight: "5px" }}
                       ></input>
-                      {category}
+                      <h5>{category}</h5>
                     </label>
                   </div>
                 );

@@ -4,20 +4,20 @@ import CartState from "./States/CartState";
 import FavouritesState from "./States/FavouritesState";
 
 const Item = ({ data }) => {
-  const { title, price, id, initialPrice, quantity } = data
-
+  const { title, price, image } = data;
+  console.log(data);
   return (
     <div className="item">
       <div className="item-info-container">
-        <div className="item-photo"></div>
+        <div className="item-photo">
+          <img src={image}></img>
+        </div>
         <h3>{title}</h3>
-        <h3>{price}p</h3>
+        <h3>{price}$</h3>
         <div className="button-wrapper">
           <button
             className="item-button"
-            onClick={() =>
-              CartState.addToCart(data)
-            }
+            onClick={() => CartState.addToCart(data)}
           >
             Add to cart
           </button>

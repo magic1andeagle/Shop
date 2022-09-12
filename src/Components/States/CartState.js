@@ -14,8 +14,6 @@ class CartState {
             return
         }
         this.cartItems.push(data)
-        this.cartItems.find((item) => item.id == data.id).quantity += 1
-        // this.cartItems[data.id - 1][1].quantity += 1
     }
 
     removeFromCart(id, data) {

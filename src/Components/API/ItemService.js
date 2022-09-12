@@ -1,7 +1,5 @@
 import axios from "axios";
 
-const result = []
-
 export default class ItemService {
   static async getItems() {
     try {

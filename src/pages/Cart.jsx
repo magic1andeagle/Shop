@@ -13,6 +13,8 @@ const Cart = observer(() => {
   const items = useContext(sportItemsContext)
   let { cartItems } = CartState;
   let totalCartValue = 0
+  
+  console.log(cartItems)
 
   return (
     <div className="cart">
