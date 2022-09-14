@@ -1,49 +1,35 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import SearchQuery from "./SearchQuery";
-
-import "../styles/Navbar.css";
+import { Assets } from "./utils/assets";
 
 const Navbar = () => {
+    const { catalog, shoppingCartBlack, favourites, contacts } = Assets
+
   return (
     <div className="navbar">
-      <div className="navbar-left-container">
-        <Link
-          className="title"
-          to="/"
-          style={{
-            textDecoration: "none",
-            color: "gold",
-            fontSize: 34,
-            paddingLeft: 20,
-          }}
-        >
-          DAILYSHOP
+      <div className="navbar_container">
+        <Link to="#">
+          <div className="nav_item">
+            <img alt="" src={catalog}></img>
+            <p>Ассортимент</p>
+          </div>
         </Link>
-        <SearchQuery />
-      </div>
-
-      <div className="navbar__links_container">
-        <Link className="navbar-link" to="/" style={{ textDecoration: "none" }}>
-          Sign in
+        <Link to="#">
+          <div className="nav_item">
+            <img alt="" src={shoppingCartBlack}></img>
+            <p>Корзина</p>
+          </div>
         </Link>
-        <a className="navbar-link" href="#" style={{ textDecoration: "none" }}>
-          Country
-        </a>
-        <Link
-          className="navbar-link"
-          to="/favourites"
-          style={{ textDecoration: "none" }}
-        >
-          Favourites
+        <Link to="#">
+          <div className="nav_item">
+            <img alt="" src={favourites}></img>
+            <p>Избранное</p>
+          </div>
         </Link>
-        <Link
-          className="navbar-link"
-          to="/cart"
-          style={{ textDecoration: "none" }}
-        >
-          Cart
-        </Link>
+        <Link to="#"><div className="nav_item">
+            <img alt="" src={contacts}></img>
+            <p>Контакты</p>
+          </div></Link>
       </div>
     </div>
   );

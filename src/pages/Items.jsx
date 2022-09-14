@@ -14,9 +14,9 @@ import "../styles/MyItem.css";
 
 function Items() {
   const [items, setItems] = useState([]);
-  const [categories, setCategories] = useState([])
+  const [categories, setCategories] = useState([]);
 
-  const getCategories = useContext(categoriesContext)
+  const getCategories = useContext(categoriesContext);
   const getItems = useContext(newItemsContext);
 
   const getNewItems = async () => {
@@ -26,7 +26,7 @@ function Items() {
 
   const setCats = async () => {
     const result = await getCategories;
-    setCategories(result)
+    setCategories(result);
   };
 
   useEffect(() => {
@@ -101,7 +101,7 @@ function Items() {
                         value={category}
                         style={{ marginRight: "5px" }}
                       ></input>
-                      <h5>{category}</h5>
+                      <h5>{category[0].toUpperCase() + category.slice(1)}</h5>
                     </label>
                   </div>
                 );

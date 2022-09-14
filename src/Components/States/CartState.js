@@ -13,7 +13,7 @@ class CartState {
             alert('Вы уже добавили данный товар')
             return
         }
-        this.cartItems.push(data)
+        this.cartItems.push({...data, quantity: 1})
     }
 
     removeFromCart(id, data) {

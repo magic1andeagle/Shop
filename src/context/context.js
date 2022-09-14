@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ItemService from "../Components/API/ItemService";
 
 export const items = [

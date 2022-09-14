@@ -10,7 +10,6 @@ import "../styles/Cart.css";
 import CartState from "../Components/States/CartState";
 
 const Cart = observer(() => {
-  const items = useContext(sportItemsContext)
   let { cartItems } = CartState;
   let totalCartValue = 0
   
@@ -32,7 +31,7 @@ const Cart = observer(() => {
             className="cart-total-value"
           >
             Total value:
-            <h1 className="cart-total-value-num">{totalCartValue}</h1>
+            <h1 className="cart-total-value-num">{totalCartValue.toFixed(2) + `$`}</h1>
             <button onClick={() => CartState.removeAllCart()}>
               Remove All
             </button>

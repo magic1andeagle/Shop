@@ -1,5 +1,5 @@
 .items-container {
-    width: 1140px;
+    width: 1920px;
     display: flex; 
     flex-direction: column;
     margin-top: 20px;
@@ -22,83 +22,89 @@
 
 .items-main {
     display: flex;
-    width: 950px;
+    width: 100%;
     flex-wrap: wrap; 
 }
 
 .item {
-    position: relative;
     display: block;
-    width: 285px;
-    height: 350px;
-    border: 1px solid rgb(78,17,122);
-    border-radius: 4px;
-    margin-right: 20px;
-    margin-bottom: 40px;
+    justify-content: space-between;
+    width: 240px;
+    height: auto;
+    background-color: white;
+
+    border-radius: 15px;
+    margin-right: 10px;
+    margin-bottom: 20px;
 }
 
 .item-info-container {
-    width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start;
-    text-align: center;
-}
 
-
-.item-info-container h3 {
-    font-size: 22px;
-    line-height: 22px;
-    margin-bottom: 10px;
-}
-
-.item-button {
-    width: 120px;
-    height: 50px;
-    align-items: flex-end;
-
-    border-radius: 12px;
-
-    background-color: transparent;
-    border: 1px solid rgb(78,17,122);
-    outline: none;
-    box-shadow: inset 0 0 0 0 #4E117A;
-    transition: ease-out 0.25s;
-
-    font-size: 16px;
-    text-align: center;
-}
-
-.item-button:hover {
-    color: #F5C240;
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    box-shadow: inset 120px 0 0 0 #4E117A;
-}
-
-.button-wrapper {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+        
+    justify-content: space-between;
+    text-align: flex-start;
 }
 
 .item-photo {
+    display: flex;
+    justify-content: center;
     width: 100%;
-    height: 150px;
+    height: 200px;
     margin-bottom: 10px;
 }
 
 .item-photo img {
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 90%;
+    max-height: 80%;
     image-rendering: crisp-edges;
-    
 }
 
-.post__btns {
+.item-info-container p {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 20px;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+    color: #293241
+}
+
+.item-price {
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.item-button {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: #3D5A80;
+
+    border-radius: 15px;
+
+    outline: none;
+    border: none;
+    transition: ease-out 0.25s;
+
+    font-size: 16px;
+    text-align: center;
+    color: white;
+}
+
+.item-button:hover {
+    letter-spacing: 0.5px;
+    cursor: pointer;
+}
+
+.button-wrapper {
+    height: 55px;
 }
 
 .items-categories {
