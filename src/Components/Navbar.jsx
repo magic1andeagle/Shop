@@ -1,35 +1,47 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Assets } from "./utils/assets";
 
 const Navbar = () => {
-    const { catalog, shoppingCartBlack, favourites, contacts } = Assets
+  const route = useLocation();
+  const { catalog, shoppingCartBlack, favourites, contacts } = Assets;
 
   return (
     <div className="navbar">
       <div className="navbar_container">
-        <Link to="#">
-          <div className="nav_item">
-            <img alt="" src={catalog}></img>
-            <p>Ассортимент</p>
-          </div>
+        <Link
+          className={`${
+            route.pathname == "/" ? "active_page" : null
+          } nav_item /`}
+          to="/"
+        >
+          <img alt="" src={catalog}></img>
+          <p>Ассортимент</p>
         </Link>
-        <Link to="#">
-          <div className="nav_item">
-            <img alt="" src={shoppingCartBlack}></img>
-            <p>Корзина</p>
-          </div>
+        <Link
+          className={`${
+            route.pathname == "/cart" ? "active_page" : null
+          } nav_item /cart`}
+          to="/cart"
+        >
+          <img alt="" src={shoppingCartBlack}></img>
+          <p>Корзина</p>
         </Link>
-        <Link to="#">
-          <div className="nav_item">
-            <img alt="" src={favourites}></img>
-            <p>Избранное</p>
-          </div>
+        <Link
+          className={`${
+            route.pathname == "/favourites" ? "active_page" : null
+          } nav_item /favourites`}
+          to="/favourites"
+        >
+          <img alt="" src={favourites}></img>
+          <p>Избранное</p>
         </Link>
-        <Link to="#"><div className="nav_item">
-            <img alt="" src={contacts}></img>
-            <p>Контакты</p>
-          </div></Link>
+        <Link className={`${
+            route.pathname == "/about" ? "active_page" : null
+          } nav_item /about`} to="/about">
+          <img alt="" src={contacts}></img>
+          <p>Контакты</p>
+        </Link>
       </div>
     </div>
   );

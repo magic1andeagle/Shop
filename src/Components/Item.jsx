@@ -3,14 +3,17 @@ import ItemState from "../Components/States/ItemState";
 import CartState from "./States/CartState";
 import FavouritesState from "./States/FavouritesState";
 import shoppingCart from "../img/shopping_cart.svg";
+import { Assets } from "./utils/assets";
 
 const Item = ({ data }) => {
   const { title, price, image } = data;
-  console.log(data);
+  const { favouritesItem, favLiked } = Assets;
+
   return (
     <div className="item">
       <div className="item-info-container">
-        <div className="item-photo">
+        <img className="like-item" src={favLiked}></img>
+        <div className="item-photo-container">
           <img src={image}></img>
         </div>
         <p>{title}</p>
@@ -21,7 +24,7 @@ const Item = ({ data }) => {
             onClick={() => CartState.addToCart(data)}
           >
             Add to cart
-            <img style={{marginLeft: 13}} src={shoppingCart}></img>
+            <img style={{ marginLeft: 13 }} src={shoppingCart}></img>
           </button>
         </div>
       </div>

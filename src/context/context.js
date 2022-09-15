@@ -67,13 +67,9 @@ export const getItems = async () => {
 };
 
 export const getCategories = async () => {
-  let result = [];
-  const response = await ItemService.getItems();
-  result = response.map((elem) => elem.category);
-  return [...result.reduce((unique, item) => {
-    return unique.includes(item) ? unique : [...unique, item];
-  }, [])];
-};
+  const response = await ItemService.getCategories()
+  return response
+}
 
 export const newItemsContext = React.createContext(getItems());
 export const categoriesContext = React.createContext(getCategories());

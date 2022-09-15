@@ -16,22 +16,22 @@ function Items() {
   const [items, setItems] = useState([]);
   const [categories, setCategories] = useState([]);
 
-  const getCategories = useContext(categoriesContext);
-  const getItems = useContext(newItemsContext);
+  const fetchCategories = useContext(categoriesContext);
+  const fetchItems = useContext(newItemsContext);
 
-  const getNewItems = async () => {
-    const result = await getItems;
+  const getItems = async () => {
+    const result = await fetchItems;
     setItems([...result]);
   };
 
-  const setCats = async () => {
-    const result = await getCategories;
-    setCategories(result);
+  const getCategories = async () => {
+    const result = await fetchCategories;
+    setCategories([...result]);
   };
 
   useEffect(() => {
-    getNewItems();
-    setCats();
+    getItems();
+    getCategories();
   }, []);
 
   const [selectedCategory, setSelectedCategory] = useState([]);
@@ -59,55 +59,38 @@ function Items() {
 
   return (
     <>
-      {}
       <div
         style={{ display: "flex", justifyContent: "space-between" }}
         className="items-container"
       >
-        <div className="sort-container">
-          <div className="custom-select">
-            <select
-              defaultValue={`default`}
-              onChange={(e) => setSelectedSort(e.target.value)}
-            >
-              <option disabled value="default">
-                Сортировка по:
-              </option>
-              <option value="price">По цене</option>
-              <option value="title">По названию</option>
-            </select>
+        <div className="sidebar_menu">
+          <div className="sidebar_wrapper">
+            <div style={{ marginBottom: "6px" }} className="categories_menu">
+              <p style={{ marginBottom: "10px" }}>Категории</p>
+              {categories.length
+                ? categories.map((category) => (
+                    <div style={{ marginBottom: "10px", fontSize: '14px', fontWeight: 500 }}>
+                      {"< " + category[0].toUpperCase() + category.slice(1)}
+                    </div>
+                  ))
+                : null}
+            </div>
+            <div className="price_menu">
+              <p>Цена</p>
+            </div>
+            <div className="rating_menu">
+              <p>Рейтинг товара</p>
+            </div>
+            <button></button>
           </div>
         </div>
-        <div style={{ display: "flex" }}>
-          <div className="items-main">
-            {filteredSortedItems.length
-              ? filteredSortedItems.map((item) => (
-                  <Item key={item.id} data={item} />
-                ))
-              : items.map((item) => <Item key={item.id} data={item} />)}
-          </div>
-          <div className="items-categories">
-            <h2>Категории</h2>
-            <div className="categories">
-              {categories.map((category) => {
-                return (
-                  <div key={category} className="category">
-                    <label htmlFor={category}>
-                      <input
-                        onClick={(e) => setCategoryHandler(e)}
-                        key={category}
-                        id={category}
-                        type="checkbox"
-                        value={category}
-                        style={{ marginRight: "5px" }}
-                      ></input>
-                      <h5>{category[0].toUpperCase() + category.slice(1)}</h5>
-                    </label>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+
+        <div className="items-main">
+          {filteredSortedItems.length
+            ? filteredSortedItems.map((item) => (
+                <Item key={item.id} data={item} />
+              ))
+            : items.map((item) => <Item key={item.id} data={item} />)}
         </div>
       </div>
     </>

@@ -12,15 +12,36 @@
 }
 
 .nav_item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-right: 20px;
+}
 
+.nav_item img {
+    width: 22px;
+    height: 27px;
+    margin-bottom: 6px;
+}
+
+.active_page img {
+    width: 22px;
+    height: 27px;
+    margin-bottom: 6px;
+    filter: invert(31%) sepia(35%) saturate(635%) hue-rotate(174deg) brightness(97%) contrast(91%);
+}
+
+.active_page p {
+    color: #3D5A80 !important;
+}
+
+.catalog_black {
+    filter: brightness(0) saturate(100%);
 }
 
 .nav_item p {
    font-size: 14px; 
    font-weight: 600;
    color: #000000;
-}
-
-.nav_item p:hover {
-    color: #3D5A80;
 }
