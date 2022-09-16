@@ -36,7 +36,7 @@ const CartItem = observer(({ id }) => {
           {totalItemPrice.toFixed(2) + `$`}
         </div>
       </div>
-      <img src={closeButton} onClick={() => CartState.removeFromCart(id, Object.entries(data))} className="delete-cart-item-button"></img>
+      <img src={closeButton} onClick={() => CartState.removeFromCart(id)} className="delete-cart-item-button"></img>
     </div>
   );
 });

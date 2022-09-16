@@ -3,7 +3,6 @@ import About from "../../pages/About";
 import Cart from "../../pages/Cart";
 import Favourites from "../../pages/Favourites";
 import Items from "../../pages/Items";
-import { sportItemsContext } from "../../context/context";
 
 export const START_PAGE_ROUTE = '/'
 export const ABOUT_PAGE_ROUTE = "/about";

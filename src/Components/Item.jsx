@@ -1,5 +1,4 @@
 import React from "react";
-import ItemState from "../Components/States/ItemState";
 import CartState from "./States/CartState";
 import FavouritesState from "./States/FavouritesState";
 import shoppingCart from "../img/shopping_cart.svg";
@@ -7,12 +6,12 @@ import { Assets } from "./utils/assets";
 
 const Item = ({ data }) => {
   const { title, price, image } = data;
-  const { favouritesItem, favLiked } = Assets;
+  const { favouritesItem } = Assets;
 
   return (
     <div className="item">
       <div className="item-info-container">
-        <img className="like-item" src={favLiked}></img>
+        <img onClick={() => FavouritesState.addFavourite(data)} className="like-item" src={favouritesItem}></img>
         <div className="item-photo-container">
           <img src={image}></img>
         </div>

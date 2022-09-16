@@ -12,7 +12,7 @@ const Counter = observer(({ getNum, id, data }) => {
 
   const decrement = (id) => {
     if (counterValue - 1 == 0) {
-      CartState.removeFromCart(id, Object.entries(data))
+      CartState.removeFromCart(id)
       return
     }
     setCounterValue(prev => prev - 1)

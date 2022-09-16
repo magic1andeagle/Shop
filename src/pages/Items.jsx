@@ -1,6 +1,6 @@
-import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import ItemService from "../Components/API/ItemService";
+import { useCategory } from "../Components/hooks/useCategory";
 import { useFilter } from "../Components/hooks/useFilter";
 import { useSort } from "../Components/hooks/useSort";
 import Item from "../Components/Item";
@@ -41,14 +41,20 @@ function Items() {
   const sortedItems = useSort(items, selectedSort);
   const filteredItems = useFilter(sortedItems, selectedCategory);
 
+  const onCategoryClick = (e) => {
+    setCategoryHandler(e);
+    e.target.classList.toggle("chosen_category");
+  };
+
   const setCategoryHandler = (e) => {
-    if (selectedCategory.some((category) => category.value == e.target.value)) {
+    const loweredCat = e.target.innerHTML.slice(5).slice(0, 1).toLowerCase() + e.target.innerHTML.slice(6)
+    if (selectedCategory.some((category) => category.value == loweredCat)) {
       setSelectedCategory((prev) =>
-        prev.filter((elem) => elem.value !== e.target.value)
+        prev.filter((elem) => elem.value !== loweredCat)
       );
       return;
     }
-    setSelectedCategory([...selectedCategory, { value: e.target.value }]);
+    setSelectedCategory([...selectedCategory, { value: e.target.innerHTML.slice(5).slice(0, 1).toLowerCase() + e.target.innerHTML.slice(6) }]);
   };
 
   useEffect(() => {
@@ -69,7 +75,16 @@ function Items() {
               <p style={{ marginBottom: "10px" }}>Категории</p>
               {categories.length
                 ? categories.map((category) => (
-                    <div style={{ marginBottom: "10px", fontSize: '14px', fontWeight: 500 }}>
+                    <div
+                      key={category}
+                      onClick={(e) => onCategoryClick(e)}
+                      style={{
+                        marginBottom: "10px",
+                        fontSize: "14px",
+                        fontWeight: 500,
+                        cursor: "pointer",
+                      }}
+                    >
                       {"< " + category[0].toUpperCase() + category.slice(1)}
                     </div>
                   ))

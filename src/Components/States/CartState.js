@@ -1,40 +1,37 @@
-import { makeAutoObservable } from "mobx"
+import { makeAutoObservable } from "mobx";
 
 class CartState {
-    cartItems = []
-    totalValue = 0
+  cartItems = [];
+  totalValue = 0;
 
-    constructor() {
-        makeAutoObservable(this)
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  addToCart(data) {
+    if (this.cartItems.find((item) => item.id == data.id)) {
+      alert("Вы уже добавили данный товар");
+      return;
     }
+    this.cartItems.push({ ...data, quantity: 1 });
+  }
 
-    addToCart(data) {
-        if (this.cartItems.find(item => item.id == data.id)) {
-            alert('Вы уже добавили данный товар')
-            return
-        }
-        this.cartItems.push({...data, quantity: 1})
-    }
+  removeFromCart(id) {
+    this.cartItems = [...this.cartItems.filter((item) => item.id !== id)];
+  }
 
-    removeFromCart(id, data) {
-        let index = this.cartItems.findIndex((item) => item.id == data[id - 1][1].id)
-        this.cartItems.find((item) => item.id == id).quantity -= 1
-        this.cartItems.splice(index, 1)
-    }
+  removeAllCart() {
+    this.cartItems = [];
+    this.totalValue = 0;
+  }
 
-    removeAllCart() {
-        this.cartItems = []
-        this.totalValue = 0
-    }
+  incrQuantity(id) {
+    this.cartItems.find((item) => item.id == id).quantity += 1;
+  }
 
-    incrQuantity(id) {
-        this.cartItems.find((item) => item.id == id).quantity += 1
-    }
-
-    decrQuantity(id) {
-        this.cartItems.find((item) => item.id == id).quantity -= 1
-    }
-
+  decrQuantity(id) {
+    this.cartItems.find((item) => item.id == id).quantity -= 1;
+  }
 }
 
-export default new CartState()
+export default new CartState();

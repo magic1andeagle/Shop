@@ -7,7 +7,6 @@ import shopLogo from "../../img/shop_logo.svg";
 import shoppingCart from "../../img/shopping_cart.svg";
 import shoppingCartBlack from "../../img/shopping_cart_black.svg";
 import favouritesItem from "../../img/favorite_border.svg";
-import favLiked from '../../img/favourite_liked.svg';
 
 export const Assets = {
   cancelClose,
@@ -15,7 +14,6 @@ export const Assets = {
   contacts,
   favourites,
   favouritesItem,
-  favLiked,
   magnifier,
   shopLogo,
   shoppingCart,

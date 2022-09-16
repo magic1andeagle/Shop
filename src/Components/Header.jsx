@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import SearchQuery from "./SearchQuery";
 
 import "../styles/Header.css";
 import "../styles/Navbar.css";
@@ -11,12 +10,12 @@ const Header = () => {
   return (
     <div className="header">
       <div className="header_container">
-        <div className="header_title_container">
-          <Link className="title" to="/">
+        <Link className="title" to="/">
+          <div className="header_title_container">
             <h1 className="header_title">MAGIC.SHOP</h1>
             <img src={shop_logo}></img>
-          </Link>
-        </div>
+          </div>
+        </Link>
         <Navbar />
       </div>
     </div>

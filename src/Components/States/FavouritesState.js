@@ -8,7 +8,7 @@ class FavouritesState {
     }
 
     addFavourite(data) {
-        if (this.favouriteItems.find((item) => item.id == data.id)) {
+        if (this.favouriteItems.some((item) => item.id == data.id)) {
             alert('Данный товар уже добавлен в избранное')
             return
         }
@@ -17,9 +17,7 @@ class FavouritesState {
     }
 
     removeFavourite(id) {
-        let index = this.favouriteItems.findIndex((item) => item.id == id)
-        this.favouriteItems.splice(index, 1)
-        console.log(this.favouriteItems)
+        this.favouriteItems = [...this.favouriteItems.filter(item => item.id !== id)]
     }
 
     removeAllFavourites() {
