@@ -1,12 +1,16 @@
+import { observer } from "mobx-react-lite";
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import "../styles/Slider.css";
+import SliderState from "./States/SliderState";
 
-const Slider = ({ min, max, onChange }) => {
+const Slider = ({ min, max, type }) => {
   const [minValue, setMinValue] = useState(min);
   const [maxValue, setMaxValue] = useState(max);
   const minValueRef = useRef(min);
   const maxValueRef = useRef(max);
   const range = useRef(null);
+
+  const { updatePrice, updateRating } = SliderState
 
   const getPercent = useCallback(
     (value) => Math.round(((value - min) / (max - min)) * 100),
@@ -41,8 +45,8 @@ const Slider = ({ min, max, onChange }) => {
   }, [maxValue, getPercent]);
 
   useEffect(() => {
-    onChange({ min: minValue, max: maxValue });
-  }, [minValue, maxValue, onChange]);
+    type == 'price' ? updatePrice(minValue, maxValue) : updateRating(minValue, maxValue)
+  }, [minValue, maxValue]);
 
   return (
     <>

@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+import { observer } from "mobx-react-lite";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import ItemService from "../Components/API/ItemService";
 import { useCategory } from "../Components/hooks/useCategory";
 import { useFilter } from "../Components/hooks/useFilter";
@@ -6,6 +7,7 @@ import { useSort } from "../Components/hooks/useSort";
 import Item from "../Components/Item";
 import SidebarMenu from "../Components/SidebarMenu";
 import Slider from "../Components/Slider";
+import SliderState from "../Components/States/SliderState";
 import TopbarMenu from "../Components/TopbarMenu";
 import {
   categoriesContext,
@@ -15,15 +17,14 @@ import {
 
 import "../styles/MyItem.css";
 
-function Items() {
+const Items = observer(() => {
   const [items, setItems] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [selectedSort, setSelectedSort] = useState("title");
   const [filteredSortedItems, setFilteredSortedItems] = useState([]);
 
-  const [isError, setIsError] = useState(false);
-  const [errorName, setErrorName] = useState("");
+  const { minPrice, maxPrice } = SliderState
 
   const fetchCategories = useContext(categoriesContext);
   const fetchItems = useContext(newItemsContext);
@@ -50,6 +51,26 @@ function Items() {
     ]);
   };
 
+  const setPriceRange = () => {
+    filteredSortedItems.length
+      ? console.log(
+        filteredSortedItems.filter((item) => item.price >= minPrice && item.price <= maxPrice)
+      )
+     // setFilteredSortedItems(
+     //   filteredSortedItems.filter(
+     //     (item) => item.price >= minPrice && item.price <= maxPrice
+     //   )
+     // )
+      : console.log(
+        items.filter((item) => item.price >= minPrice && item.price <= maxPrice)
+      )
+        //setFilteredSortedItems(
+        //  items.filter(
+        //    (item) => item.price >= minPrice && item.price <= maxPrice
+        //  )
+        //);
+  };
+
   const getItems = async () => {
     const result = await fetchItems;
     setItems([...result]);
@@ -59,6 +80,10 @@ function Items() {
     const result = await fetchCategories;
     setCategories([...result]);
   };
+
+  useEffect(() => {
+    setPriceRange()
+  }, [minPrice, maxPrice]);
 
   useEffect(() => {
     getItems();
@@ -94,6 +119,6 @@ function Items() {
       </div>
     </>
   );
-}
+})
 
 export default Items;

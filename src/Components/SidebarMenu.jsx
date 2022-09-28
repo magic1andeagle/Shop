@@ -1,11 +1,9 @@
-import React from "react";
-import { useState, useContext } from "react";
-import { categoriesContext } from "../context/context";
+import React, { useEffect } from "react";
+import { useState } from "react";
 import Slider from "./Slider";
+import SliderState from "../Components/States/SliderState";
 
 const SidebarMenu = ({ categories, setCategoryHandler }) => {
-  const [selectedCategory, setSelectedCategory] = useState([]);
-  const fetchCategories = useContext(categoriesContext);
 
   const onCategoryClick = (e) => {
     setCategoryHandler(e);
@@ -39,20 +37,16 @@ const SidebarMenu = ({ categories, setCategoryHandler }) => {
           <Slider
             min={0}
             max={1000}
-            onChange={({ min, max }) =>
-              console.log(`min = ${min}, max = ${max}`)
-            }
+            type={`price`}
           />
         </div>
         <div style={{ marginBottom: "25px" }} className="rating_menu">
           <p style={{ marginBottom: "15px" }}>Рейтинг товара</p>
           <Slider
-            min={0}
+            min={1}
             max={5}
-            onChange={({ min, max }) =>
-              console.log(`min = ${min}, max = ${max}`)
-            }
-          ></Slider>
+            type={`rating`}
+          />
         </div>
         <button className="applyButton">
           <p>Найти</p>

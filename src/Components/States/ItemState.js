@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
 
 class ItemState {
-   cartItems = [];
+  cartItems = [];
   favouriteItems = [];
   totalCartValue = 0;
   finalItemPrice = 0;
