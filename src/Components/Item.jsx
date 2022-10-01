@@ -1,12 +1,11 @@
 import React from "react";
 import CartState from "./States/CartState";
 import FavouritesState from "./States/FavouritesState";
-import shoppingCart from "../img/shopping_cart.svg";
 import { Assets } from "./utils/assets";
 
 const Item = ({ data }) => {
   const { title, price, image } = data;
-  const { favouritesItem } = Assets;
+  const { favouritesItem, shoppingCart } = Assets;
 
   return (
     <div className="item">

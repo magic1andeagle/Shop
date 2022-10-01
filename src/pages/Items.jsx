@@ -11,23 +11,23 @@ import SliderState from "../Components/States/SliderState";
 import TopbarMenu from "../Components/TopbarMenu";
 import {
   categoriesContext,
-  newItemsContext,
-  sportItemsContext,
+  itemsContext,
 } from "../context/context";
 
-import "../styles/MyItem.css";
+import "../styles/pages/MyItem.css";
 
 const Items = observer(() => {
   const [items, setItems] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [searchedItems, setSearchedItems] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [selectedSort, setSelectedSort] = useState("title");
   const [filteredSortedItems, setFilteredSortedItems] = useState([]);
 
-  const { minPrice, maxPrice } = SliderState
+  const { minPrice, maxPrice } = SliderState;
 
   const fetchCategories = useContext(categoriesContext);
-  const fetchItems = useContext(newItemsContext);
+  const fetchItems = useContext(itemsContext);
   const sortedItems = useSort(items, selectedSort);
   const filteredItems = useFilter(sortedItems, selectedCategory);
 
@@ -54,21 +54,25 @@ const Items = observer(() => {
   const setPriceRange = () => {
     filteredSortedItems.length
       ? console.log(
-        filteredSortedItems.filter((item) => item.price >= minPrice && item.price <= maxPrice)
-      )
-     // setFilteredSortedItems(
-     //   filteredSortedItems.filter(
-     //     (item) => item.price >= minPrice && item.price <= maxPrice
-     //   )
-     // )
-      : console.log(
-        items.filter((item) => item.price >= minPrice && item.price <= maxPrice)
-      )
-        //setFilteredSortedItems(
-        //  items.filter(
-        //    (item) => item.price >= minPrice && item.price <= maxPrice
-        //  )
-        //);
+          filteredSortedItems.filter(
+            (item) => item.price >= minPrice && item.price <= maxPrice
+          )
+        )
+      : // setFilteredSortedItems(
+        //   filteredSortedItems.filter(
+        //     (item) => item.price >= minPrice && item.price <= maxPrice
+        //   )
+        // )
+        console.log(
+          items.filter(
+            (item) => item.price >= minPrice && item.price <= maxPrice
+          )
+        );
+    //setFilteredSortedItems(
+    //  items.filter(
+    //    (item) => item.price >= minPrice && item.price <= maxPrice
+    //  )
+    //);
   };
 
   const getItems = async () => {
@@ -82,7 +86,7 @@ const Items = observer(() => {
   };
 
   useEffect(() => {
-    setPriceRange()
+    setPriceRange();
   }, [minPrice, maxPrice]);
 
   useEffect(() => {
@@ -100,14 +104,14 @@ const Items = observer(() => {
     <>
       <div
         style={{ display: "flex", justifyContent: "space-between" }}
-        className="items-container"
+        className="items-wrapper"
       >
         <SidebarMenu
           categories={categories}
           setCategoryHandler={setCategoryHandler}
         />
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          {/* <TopbarMenu/> */}
+        <div className="items-container" style={{}}>
+          <TopbarMenu setState={setFilteredSortedItems} items={items} />
           <div className="items-main">
             {filteredSortedItems.length
               ? filteredSortedItems.map((item) => (
@@ -119,6 +123,6 @@ const Items = observer(() => {
       </div>
     </>
   );
-})
+});
 
 export default Items;

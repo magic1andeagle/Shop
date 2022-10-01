@@ -2,33 +2,37 @@
     display: flex;
     align-items: center;
 
-    width: 150px;
-    height: 48px;
+    width: 292px;
+    height: 45px;
     background: transparent;
-
+    border: 2px solid #3D5A80;
+    border-radius: 10px;
+    margin-left: 10px;
 }
 
 .search-query-input {
     display: flex;
-    width: 150px;
+    width: 100%;
 
     background: transparent;
     border: none;
     outline: none;
 
-    color: #E5E5E5;
-    font-size: 14px;
+    color: #293241;
+    font-size: 16px;
     font-weight: 600;
-
-    margin-left: 25px;
+    
+    margin-left: 10px;
 }
 
 .search-query-input::placeholder {
-    color: #E5E5E5;
-    font-size: 14px;
+    color: #BABABA;
+    font-size: 16px;
+    line-height: 16px;
     font-weight: 600;
 }
 
 .search-query-magnifier {
     cursor: pointer;
+    margin-right: 12px;
 }

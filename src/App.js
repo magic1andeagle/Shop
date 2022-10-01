@@ -6,18 +6,18 @@ import AppRouter from "../src/Components/Router/AppRouter";
 import Header from "../src/Components/Header";
 
 import "../src/styles/App.css";
-import { sportItemsContext } from "./context/context";
+import { itemsContext } from "./context/context";
 
 function App() {
   return (
-    <sportItemsContext.Provider value={sportItemsContext._currentValue}>
+    <itemsContext.Provider value={itemsContext._currentValue}>
       <BrowserRouter>
         <Header />
         <div className="wrapper">
           <AppRouter />
         </div>
       </BrowserRouter>
-    </sportItemsContext.Provider>
+    </itemsContext.Provider>
   );
 }
 

@@ -1,14 +1,12 @@
-import React, { useMemo, useState, useContext } from 'react';
-import magnifier from '../img/magnifier.svg'
-import { sportItemsContext } from '../context/context';
+import React, { useMemo, useState, useContext, useEffect } from 'react';
+import magnifier from '../assets/magnifier.svg'
 
-import '../styles/SearchQuery.css'
+import '../styles/components/SearchQuery.css'
 import { useSearch } from './hooks/useSearch';
 
-const SearchQuery = () => {
-    const items = useContext(sportItemsContext)
+const SearchQuery = ({ items, setState }) => {
     const [value, setValue] = useState('')
-    const searchFunc = useSearch(value, items)
+    useSearch(value, items, setState)
 
     const onMagnifierClick = () => {
         // ДОБАВИТЬ МОДАЛКУ ДЛЯ НАЙДЕННЫХ ТОВАРОВ
@@ -24,3 +22,5 @@ const SearchQuery = () => {
 }
 
 export default SearchQuery;
+
+

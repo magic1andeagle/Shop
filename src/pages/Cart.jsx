@@ -6,7 +6,7 @@ import { observer } from "mobx-react-lite";
 import { sportItemsContext } from "../context/context";
 import { useContext } from "react";
 
-import "../styles/Cart.css";
+import "../styles/pages/Cart.css";
 import CartState from "../Components/States/CartState";
 
 const Cart = observer(() => {

@@ -5,7 +5,7 @@ import ItemState from "../Components/States/ItemState";
 
 import FavouritesState from '../Components/States/FavouritesState'
 
-import "../styles/Favourite.css";
+import "../styles/pages/Favourite.css";
 import { observer } from "mobx-react-lite";
 
 const Favourites = observer(() => {

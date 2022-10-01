@@ -1,6 +1,5 @@
-import { observer } from "mobx-react-lite";
 import React, { useState, useRef, useCallback, useEffect } from "react";
-import "../styles/Slider.css";
+import "../styles/components/Slider.css";
 import SliderState from "./States/SliderState";
 
 const Slider = ({ min, max, type }) => {

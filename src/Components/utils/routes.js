@@ -1,4 +1,3 @@
-import App from "../../App";
 import About from "../../pages/About";
 import Cart from "../../pages/Cart";
 import Favourites from "../../pages/Favourites";

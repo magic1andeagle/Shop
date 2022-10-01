@@ -1,18 +1,19 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import ItemState from "../Components/States/ItemState";
-import styles from "../styles/Cart.css";
+import React, { useContext, useEffect, useState } from "react";
+import "../styles/pages/Cart.css";
 import Counter from "../Components/Counter";
 import { observer } from "mobx-react-lite";
-import closeButton from '../img/cancel-close.svg'
 
 import CartState from "./States/CartState";
-import { sportItemsContext } from "../context/context";
+import { itemsContext } from "../context/context";
+import { Assets } from "./utils/assets";
 
 const CartItem = observer(({ id }) => {
+  const { closeButton } = Assets
+
   const { cartItems } = CartState
   const title = cartItems.find((item) => item.id == id).title
   const price = cartItems.find((item) => item.id == id).price
-  const data = useContext(sportItemsContext)
+  const data = useContext(itemsContext)
   const [currentQuantity, setCurrentQuantity] = useState(1)
 
   const getCurrentNumber = (currentValue) => {

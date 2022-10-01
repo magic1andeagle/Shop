@@ -1,7 +1,14 @@
-.items-container {
+.items-wrapper {
     width: 1920px;
     display: flex; 
     margin-top: 20px;
+}
+
+.items-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0px 25px;
 }
 
 .sidebar_menu {
@@ -23,8 +30,10 @@
 
 .items-main {
     display: flex;
-    justify-content: flex-end;
+    width: 100%;
+    justify-content: stretch;
     flex-wrap: wrap;
+    justify-items: stretch;
 }
 
 .item {
@@ -197,9 +206,4 @@
 .applyButton:hover {
     cursor: pointer;
     letter-spacing: 0.5px;
-}
-
-.topBarMenuContainer {
-    height: 64px;
-    background-color: white;
 }
