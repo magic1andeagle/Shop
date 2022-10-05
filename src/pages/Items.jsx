@@ -1,35 +1,31 @@
 import { observer } from "mobx-react-lite";
-import React, { useContext, useEffect, useRef, useState } from "react";
-import ItemService from "../Components/API/ItemService";
+import React, { useContext, useEffect, useState } from "react";
 import { useCategory } from "../Components/hooks/useCategory";
-import { useFilter } from "../Components/hooks/useFilter";
-import { useSort } from "../Components/hooks/useSort";
 import Item from "../Components/Item";
 import SidebarMenu from "../Components/SidebarMenu";
-import Slider from "../Components/Slider";
 import SliderState from "../Components/States/SliderState";
 import TopbarMenu from "../Components/TopbarMenu";
-import {
-  categoriesContext,
-  itemsContext,
-} from "../context/context";
+import { categoriesContext, itemsContext } from "../context/context";
+import ItemState from "../Components/States/ItemState";
 
 import "../styles/pages/MyItem.css";
 
 const Items = observer(() => {
   const [items, setItems] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [searchedItems, setSearchedItems] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState([]);
-  const [selectedSort, setSelectedSort] = useState("title");
-  const [filteredSortedItems, setFilteredSortedItems] = useState([]);
+  const [catItems, setCatItems] = useState([])
+  const [priceRateRangedItems, setPriceRateRangedItems] = useState([])
+  const [searchedItems, setSearchedItems] = useState([])
+  const [filteredItems, setFilteredItems] = useState([]);
 
-  const { minPrice, maxPrice } = SliderState;
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState([]);
+
+  const { minPrice, maxPrice, minRating, maxRating } = SliderState;
+  const { updateItems, initItems, setCategoryItems, categoryItems } = ItemState;
 
   const fetchCategories = useContext(categoriesContext);
   const fetchItems = useContext(itemsContext);
-  const sortedItems = useSort(items, selectedSort);
-  const filteredItems = useFilter(sortedItems, selectedCategory);
+  const getCategoryItems = useCategory(items, selectedCategory);
 
   const setCategoryHandler = (e) => {
     const loweredCat =
@@ -51,33 +47,44 @@ const Items = observer(() => {
     ]);
   };
 
+  const onSliderChange = () => {
+
+  }
+
   const setPriceRange = () => {
-    filteredSortedItems.length
-      ? console.log(
-          filteredSortedItems.filter(
+    selectedCategory.length
+      ? setCatItems(
+          categoryItems.filter(
             (item) => item.price >= minPrice && item.price <= maxPrice
           )
         )
-      : // setFilteredSortedItems(
-        //   filteredSortedItems.filter(
-        //     (item) => item.price >= minPrice && item.price <= maxPrice
-        //   )
-        // )
-        console.log(
-          items.filter(
+      : setItems(
+          initItems.filter(
             (item) => item.price >= minPrice && item.price <= maxPrice
           )
         );
-    //setFilteredSortedItems(
-    //  items.filter(
-    //    (item) => item.price >= minPrice && item.price <= maxPrice
-    //  )
-    //);
+  };
+
+  const setRatingRange = () => {
+    selectedCategory.length
+      ? setCategoryItems(
+          categoryItems.filter(
+            (item) =>
+              item.rating.rate >= minRating && item.rating.rate <= maxRating
+          )
+        )
+      : setItems(
+          initItems.filter(
+            (item) =>
+              item.rating.rate >= minRating && item.rating.rate <= maxRating
+          )
+        );
   };
 
   const getItems = async () => {
     const result = await fetchItems;
     setItems([...result]);
+    updateItems(result);
   };
 
   const getCategories = async () => {
@@ -90,15 +97,18 @@ const Items = observer(() => {
   }, [minPrice, maxPrice]);
 
   useEffect(() => {
+    setRatingRange();
+  }, [minRating, maxRating]);
+
+  useEffect(() => {
     getItems();
     getCategories();
   }, []);
 
   useEffect(() => {
-    selectedCategory.length
-      ? setFilteredSortedItems(filteredItems)
-      : setFilteredSortedItems(sortedItems);
-  }, [selectedCategory, selectedSort]);
+      setCategoryItems(getCategoryItems)
+      setCatItems(getCategoryItems);
+  }, [selectedCategory]);
 
   return (
     <>
@@ -111,10 +121,19 @@ const Items = observer(() => {
           setCategoryHandler={setCategoryHandler}
         />
         <div className="items-container" style={{}}>
-          <TopbarMenu setState={setFilteredSortedItems} items={items} />
+          <TopbarMenu
+            setState={
+              selectedCategory.length ? setCatItems : setItems
+            }
+            items={
+              selectedCategory.length || minPrice !== 0 || maxPrice !== 1000
+                ? filteredItems
+                : initItems
+            }
+          />
           <div className="items-main">
-            {filteredSortedItems.length
-              ? filteredSortedItems.map((item) => (
+            {selectedCategory.length
+              ? catItems.map((item) => (
                   <Item key={item.id} data={item} />
                 ))
               : items.map((item) => <Item key={item.id} data={item} />)}

@@ -4,7 +4,6 @@ import Slider from "./Slider";
 import SliderState from "../Components/States/SliderState";
 
 const SidebarMenu = ({ categories, setCategoryHandler }) => {
-
   const onCategoryClick = (e) => {
     setCategoryHandler(e);
     e.target.classList.toggle("chosen_category");
@@ -34,19 +33,11 @@ const SidebarMenu = ({ categories, setCategoryHandler }) => {
         </div>
         <div style={{ marginBottom: "20px" }} className="price_menu">
           <p style={{ marginBottom: "15px" }}>Цена</p>
-          <Slider
-            min={0}
-            max={1000}
-            type={`price`}
-          />
+          <Slider min={0} max={1000} type={`price`} />
         </div>
         <div style={{ marginBottom: "25px" }} className="rating_menu">
           <p style={{ marginBottom: "15px" }}>Рейтинг товара</p>
-          <Slider
-            min={1}
-            max={5}
-            type={`rating`}
-          />
+          <Slider min={1} max={5} type={`rating`} />
         </div>
         <button className="applyButton">
           <p>Найти</p>

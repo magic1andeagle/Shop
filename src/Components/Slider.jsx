@@ -9,7 +9,7 @@ const Slider = ({ min, max, type }) => {
   const maxValueRef = useRef(max);
   const range = useRef(null);
 
-  const { updatePrice, updateRating } = SliderState
+  const { updatePrice, updateRating } = SliderState;
 
   const getPercent = useCallback(
     (value) => Math.round(((value - min) / (max - min)) * 100),
@@ -44,7 +44,9 @@ const Slider = ({ min, max, type }) => {
   }, [maxValue, getPercent]);
 
   useEffect(() => {
-    type == 'price' ? updatePrice(minValue, maxValue) : updateRating(minValue, maxValue)
+    type == "price"
+      ? updatePrice(minValue, maxValue)
+      : updateRating(minValue, maxValue);
   }, [minValue, maxValue]);
 
   return (

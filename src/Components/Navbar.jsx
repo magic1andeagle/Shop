@@ -38,7 +38,7 @@ const Navbar = () => {
         </Link>
         <Link className={`${
             route.pathname == "/about" ? "active_page" : null
-          } nav_item /about`} to="/about">
+          } nav_item /about`} to="/about" style={{marginRight: 0}}>
           <img alt="" src={contacts}></img>
           <p>Контакты</p>
         </Link>

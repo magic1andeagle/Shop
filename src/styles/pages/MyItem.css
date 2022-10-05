@@ -1,6 +1,5 @@
 .items-wrapper {
     width: 1920px;
-    display: flex; 
     margin-top: 20px;
 }
 
@@ -8,7 +7,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 0px 25px;
+    padding-left: 25px;
 }
 
 .sidebar_menu {
@@ -31,9 +30,7 @@
 .items-main {
     display: flex;
     width: 100%;
-    justify-content: stretch;
     flex-wrap: wrap;
-    justify-items: stretch;
 }
 
 .item {
@@ -44,8 +41,12 @@
     background-color: white;
 
     border-radius: 15px;
-    margin-right: 10px;
+    margin-right: 26px;
     margin-bottom: 20px;
+}
+
+.item:nth-child(5n) {
+    margin-right: 0;
 }
 
 .item-info-container {

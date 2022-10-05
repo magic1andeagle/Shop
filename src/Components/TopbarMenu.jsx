@@ -2,7 +2,7 @@ import React from "react";
 import SearchQuery from "./SearchQuery";
 import { Assets } from "./utils/assets";
 
-import '../styles/components/Topbarmenu.css'
+import "../styles/components/Topbarmenu.css";
 
 const TopbarMenu = ({ items, setState }) => {
   const { rowType, columnType } = Assets;
@@ -12,10 +12,10 @@ const TopbarMenu = ({ items, setState }) => {
       <SearchQuery items={items} setState={setState} />
       <div className={`displayTypeMenu`}>
         <div className={`displayOption`}>
-          <img src={columnType}/>
+          <img src={columnType} />
         </div>
         <div className={`displayOption`}>
-            <img src={rowType}/>
+          <img src={rowType} />
         </div>
       </div>
     </div>

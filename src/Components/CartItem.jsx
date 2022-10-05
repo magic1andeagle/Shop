@@ -8,7 +8,7 @@ import { itemsContext } from "../context/context";
 import { Assets } from "./utils/assets";
 
 const CartItem = observer(({ id }) => {
-  const { closeButton } = Assets
+  const { cancelClose } = Assets
 
   const { cartItems } = CartState
   const title = cartItems.find((item) => item.id == id).title
@@ -37,7 +37,7 @@ const CartItem = observer(({ id }) => {
           {totalItemPrice.toFixed(2) + `$`}
         </div>
       </div>
-      <img src={closeButton} onClick={() => CartState.removeFromCart(id)} className="delete-cart-item-button"></img>
+      <img src={cancelClose} onClick={() => CartState.removeFromCart(id)} className="delete-cart-item-button"></img>
     </div>
   );
 });
