@@ -3,7 +3,7 @@ import { useState } from "react";
 import Slider from "./Slider";
 import SliderState from "../Components/States/SliderState";
 
-const SidebarMenu = ({ categories, setCategoryHandler }) => {
+const SidebarMenu = ({ categories, setCategoryHandler, onSubmit }) => {
   const onCategoryClick = (e) => {
     setCategoryHandler(e);
     e.target.classList.toggle("chosen_category");
@@ -39,7 +39,7 @@ const SidebarMenu = ({ categories, setCategoryHandler }) => {
           <p style={{ marginBottom: "15px" }}>Рейтинг товара</p>
           <Slider min={1} max={5} type={`rating`} />
         </div>
-        <button className="applyButton">
+        <button onClick={() => onSubmit()} className="applyButton">
           <p>Найти</p>
         </button>
       </div>

@@ -12,10 +12,8 @@ import "../styles/pages/MyItem.css";
 
 const Items = observer(() => {
   const [items, setItems] = useState([]);
-  const [catItems, setCatItems] = useState([])
-  const [priceRateRangedItems, setPriceRateRangedItems] = useState([])
-  const [searchedItems, setSearchedItems] = useState([])
-  const [filteredItems, setFilteredItems] = useState([]);
+  const [catItems, setCatItems] = useState([]);
+  const [searchedItems, setSearchedItems] = useState([]);
 
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState([]);
@@ -25,7 +23,29 @@ const Items = observer(() => {
 
   const fetchCategories = useContext(categoriesContext);
   const fetchItems = useContext(itemsContext);
-  const getCategoryItems = useCategory(items, selectedCategory);
+  const getCategoryItems = useCategory(initItems, selectedCategory);
+
+  const filterItems = () => {
+    selectedCategory.length
+      ? setItems(
+          catItems.filter(
+            (item) =>
+              item.price >= minPrice &&
+              item.price <= maxPrice &&
+              item.rating.rate >= minRating &&
+              item.rating.rate <= maxRating
+          )
+        )
+      : setItems(
+          initItems.filter(
+            (item) =>
+              item.price >= minPrice &&
+              item.price <= maxPrice &&
+              item.rating.rate >= minRating &&
+              item.rating.rate <= maxRating
+          )
+        );
+  };
 
   const setCategoryHandler = (e) => {
     const loweredCat =
@@ -47,38 +67,8 @@ const Items = observer(() => {
     ]);
   };
 
-  const onSliderChange = () => {
-
-  }
-
-  const setPriceRange = () => {
-    selectedCategory.length
-      ? setCatItems(
-          categoryItems.filter(
-            (item) => item.price >= minPrice && item.price <= maxPrice
-          )
-        )
-      : setItems(
-          initItems.filter(
-            (item) => item.price >= minPrice && item.price <= maxPrice
-          )
-        );
-  };
-
-  const setRatingRange = () => {
-    selectedCategory.length
-      ? setCategoryItems(
-          categoryItems.filter(
-            (item) =>
-              item.rating.rate >= minRating && item.rating.rate <= maxRating
-          )
-        )
-      : setItems(
-          initItems.filter(
-            (item) =>
-              item.rating.rate >= minRating && item.rating.rate <= maxRating
-          )
-        );
+  const onSubmit = () => {
+    filterItems();
   };
 
   const getItems = async () => {
@@ -93,21 +83,13 @@ const Items = observer(() => {
   };
 
   useEffect(() => {
-    setPriceRange();
-  }, [minPrice, maxPrice]);
-
-  useEffect(() => {
-    setRatingRange();
-  }, [minRating, maxRating]);
-
-  useEffect(() => {
     getItems();
     getCategories();
   }, []);
 
   useEffect(() => {
-      setCategoryItems(getCategoryItems)
-      setCatItems(getCategoryItems);
+    setCategoryItems(getCategoryItems);
+    setCatItems(getCategoryItems);
   }, [selectedCategory]);
 
   return (
@@ -119,24 +101,25 @@ const Items = observer(() => {
         <SidebarMenu
           categories={categories}
           setCategoryHandler={setCategoryHandler}
+          onSubmit={onSubmit}
         />
         <div className="items-container" style={{}}>
           <TopbarMenu
-            setState={
-              selectedCategory.length ? setCatItems : setItems
-            }
+            setState={selectedCategory.length ? setCatItems : setItems}
             items={
               selectedCategory.length || minPrice !== 0 || maxPrice !== 1000
-                ? filteredItems
+                ? categoryItems
                 : initItems
             }
           />
           <div className="items-main">
-            {selectedCategory.length
-              ? catItems.map((item) => (
-                  <Item key={item.id} data={item} />
-                ))
-              : items.map((item) => <Item key={item.id} data={item} />)}
+            {items.length ? (
+              items.map((item) => <Item key={item.id} data={item} />)
+            ) : (
+              <div style={{ width: "100%", textAlign: "center" }}>
+                <h1>По вашему запросу ничего не найдено</h1>
+              </div>
+            )}
           </div>
         </div>
       </div>
