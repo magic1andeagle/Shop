@@ -1,50 +1,52 @@
 import { observer } from "mobx-react-lite";
 import React, { useContext, useEffect, useState } from "react";
-import { useCategory } from "../Components/hooks/useCategory";
+import { useCategory } from "../hooks/useCategory";
 import Item from "../Components/Item";
 import SidebarMenu from "../Components/SidebarMenu";
-import SliderState from "../Components/States/SliderState";
+import SliderState from "../States/SliderState";
 import TopbarMenu from "../Components/TopbarMenu";
 import { categoriesContext, itemsContext } from "../context/context";
-import ItemState from "../Components/States/ItemState";
+import ItemState from "../States/ItemState";
 
 import "../styles/pages/MyItem.css";
+import { Assets } from "../utils/assets";
 
 const Items = observer(() => {
   const [items, setItems] = useState([]);
   const [catItems, setCatItems] = useState([]);
-  const [searchedItems, setSearchedItems] = useState([]);
-
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState([]);
 
   const { minPrice, maxPrice, minRating, maxRating } = SliderState;
   const { updateItems, initItems, setCategoryItems, categoryItems } = ItemState;
+  const { paginationButton } = Assets;
 
   const fetchCategories = useContext(categoriesContext);
   const fetchItems = useContext(itemsContext);
   const getCategoryItems = useCategory(initItems, selectedCategory);
 
   const filterItems = () => {
-    selectedCategory.length
-      ? setItems(
-          catItems.filter(
-            (item) =>
-              item.price >= minPrice &&
-              item.price <= maxPrice &&
-              item.rating.rate >= minRating &&
-              item.rating.rate <= maxRating
-          )
+    if (selectedCategory.length) {
+      let arr = catItems.filter(
+        (item) =>
+          item.price >= minPrice &&
+          item.price <= maxPrice &&
+          item.rating.rate >= minRating &&
+          item.rating.rate <= maxRating
+      );
+      setItems(arr);
+      setCategoryItems(arr);
+    } else {
+      setItems(
+        initItems.filter(
+          (item) =>
+            item.price >= minPrice &&
+            item.price <= maxPrice &&
+            item.rating.rate >= minRating &&
+            item.rating.rate <= maxRating
         )
-      : setItems(
-          initItems.filter(
-            (item) =>
-              item.price >= minPrice &&
-              item.price <= maxPrice &&
-              item.rating.rate >= minRating &&
-              item.rating.rate <= maxRating
-          )
-        );
+      );
+    }
   };
 
   const setCategoryHandler = (e) => {
@@ -103,14 +105,10 @@ const Items = observer(() => {
           setCategoryHandler={setCategoryHandler}
           onSubmit={onSubmit}
         />
-        <div className="items-container" style={{}}>
+        <div className="items-container">
           <TopbarMenu
-            setState={selectedCategory.length ? setCatItems : setItems}
-            items={
-              selectedCategory.length || minPrice !== 0 || maxPrice !== 1000
-                ? categoryItems
-                : initItems
-            }
+            setState={setItems}
+            items={selectedCategory.length ? categoryItems : items}
           />
           <div className="items-main">
             {items.length ? (
@@ -120,6 +118,15 @@ const Items = observer(() => {
                 <h1>По вашему запросу ничего не найдено</h1>
               </div>
             )}
+            <div
+              style={{
+                display: "flex",
+                width: "100%",
+                justifyContent: "center",
+              }}
+            >
+              <img src={paginationButton} alt="paginationButton" />
+            </div>
           </div>
         </div>
       </div>

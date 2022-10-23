@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
-import CartState from "./States/CartState";
+import CartState from "../States/CartState";
 
 const Counter = observer(({ getNum, id, data }) => {
   const [counterValue, setCounterValue] = useState(1)

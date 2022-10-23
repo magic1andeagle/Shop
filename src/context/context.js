@@ -1,5 +1,5 @@
 import React from "react";
-import ItemService from "../Components/API/ItemService";
+import ItemService from "../API/ItemService";
 
 const getItems = async () => {
   const response = await ItemService.getItems();

@@ -33,9 +33,10 @@
     flex-wrap: wrap;
 }
 
+/* Card Item */
+
 .item {
     display: block;
-    justify-content: space-between;
     width: 300px;
     height: auto;
     background-color: white;
@@ -49,16 +50,12 @@
     margin-right: 0;
 }
 
-.item-info-container {
+.item-container {
     display: flex;
     flex-direction: column;
-
-    width: 100%;
-    height: 100%;
-    padding: 20px;
-        
     justify-content: space-between;
-    text-align: flex-start;
+    height: 100%;
+    padding: 20px; 
 }
 
 .like-item {
@@ -71,7 +68,7 @@
     scale: 1.05;
 }
 
-.item-photo-container {
+.item-photo {
     display: flex;
     justify-content: center;
     width: 100%;
@@ -79,17 +76,28 @@
     margin-bottom: 10px;
 }
 
-.item-photo-container img {
+.item-photo img {
     max-width: 90%;
     max-height: 80%;
     image-rendering: crisp-edges;
 }
 
-.item-info-container p {
+.item-data {
+    display: flex;
+    height: auto;
+    flex-direction: column;
+    justify-content: space-between;
     font-size: 20px;
     font-weight: 700;
     line-height: 20px;
-    margin-bottom: 10px;
+    word-wrap: break-word;
+    color: #293241
+}
+
+.item-title {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 20px;
     word-wrap: break-word;
     color: #293241
 }
@@ -97,6 +105,11 @@
 .item-price {
     font-size: 17px;
     font-weight: 500;
+}
+
+.button-wrapper {
+    justify-content: flex-end;
+    height: 55px;
 }
 
 .item-button {
@@ -125,7 +138,105 @@
     cursor: pointer;
 }
 
-.button-wrapper {
+/* Horiz Item */
+
+.itemHoriz {
+    display: flex;
+    width: 100%;
+    height: 200px;
+    margin-bottom: 30px;
+
+    border-radius: 15px;
+    background-color: white;
+}
+
+.itemHoriz-container {
+    display: flex;
+    width: 100%;
+    padding: 20px;
+}
+
+.itemHoriz-data-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding-top: 15px;
+}
+
+.itemHoriz-data {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 20px;
+    color: #293241
+}
+
+.itemHoriz-info {
+    display: flex;
+    height: 100%;
+}
+
+.itemHoriz-charcs:nth-child(1n) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 150px;
+    height: 80%;
+    border: 2px solid #3D5A80;
+    border-radius: 15px;
+
+    margin-right: 30px;
+}
+
+.itemHoriz-title {
+    font-size: 24px;
+}
+
+.itemHoriz-photo-container {
+    display: flex;
+    width: 200px;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50px;
+}
+
+.itemHoriz-photo-container img {
+    max-width: 90%;
+    max-height: 90%;
+    image-rendering: crisp-edges;
+}
+
+.itemHoriz-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: #3D5A80;
+
+    border-radius: 15px;
+
+    outline: none;
+    border: none;
+    transition: ease-out 0.25s;
+
+    font-size: 16px;
+    text-align: center;
+    color: white;
+}
+
+.itemHoriz-button:hover {
+    letter-spacing: 0.5px;
+    background-color: #4B6E9C;
+    cursor: pointer;
+ }
+
+.itemHoriz-buttons-wrapper {
     height: 55px;
 }
 
@@ -169,16 +280,24 @@
     height: 22px;
 }
 
-.price_input {
-    width: 122px;
-    height: 30px;
+.price_input_container {
+    display: flex;
+    width: 122;
+    margin-right: 5px;
+    align-items: center;
     border: 1px solid #D9D9D9;
     border-radius: 8px;
-    outline: none;
 }
 
 .price_input:focus {
     border: 1px solid #3D5A80;
+}
+
+.price_input {
+    width: 100%;
+    height: 30px;
+    border: none;
+    outline: none;
 }
 
 .price_input:invalid {

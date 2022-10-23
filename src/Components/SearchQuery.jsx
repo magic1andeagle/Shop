@@ -1,8 +1,8 @@
-import React, { useMemo, useState, useContext, useEffect } from "react";
+import React, { useState } from "react";
 import magnifier from "../assets/magnifier.svg";
 
 import "../styles/components/SearchQuery.css";
-import { useSearch } from "./hooks/useSearch";
+import { useSearch } from "../hooks/useSearch";
 
 const SearchQuery = ({ items, setState }) => {
   const [value, setValue] = useState("");

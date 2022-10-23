@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import "../styles/components/Slider.css";
-import SliderState from "./States/SliderState";
+import SliderState from "../States/SliderState";
 
 const Slider = ({ min, max, type }) => {
   const [minValue, setMinValue] = useState(min);
@@ -28,7 +28,7 @@ const Slider = ({ min, max, type }) => {
       range.current.style.left = `${minPercent}%`;
       range.current.style.width = `${maxPercent - minPercent}%`;
     }
-  }, [minValue, getPercent]);
+  }, [minValue, getPercent, maxValue]);
 
   useEffect(() => {
     const priceGap = maxValue - minValue;
@@ -41,10 +41,10 @@ const Slider = ({ min, max, type }) => {
     if (range.current) {
       range.current.style.width = `${maxPercent - minPercent}%`;
     }
-  }, [maxValue, getPercent]);
+  }, [maxValue, getPercent, minValue]);
 
   useEffect(() => {
-    type == "price"
+    type === "price"
       ? updatePrice(minValue, maxValue)
       : updateRating(minValue, maxValue);
   }, [minValue, maxValue]);
@@ -85,31 +85,45 @@ const Slider = ({ min, max, type }) => {
         </div>
       </div>
       <div className="price_range_inputs">
-        <input
-          pattern={`${minValue == 0 ? "[0-9]" : "^[1-9]\\d*$"}`}
-          maxLength={`4`}
-          style={{ marginRight: "5px" }}
-          className="price_input"
-          placeholder="from:"
-          value={minValue}
-          onChange={(e) => {
-            !e.target.value.length
-              ? setMinValue(min)
-              : setMinValue(e.target.value);
+        <div
+          className="price_input_container"
+          style={{
+            display: "flex",
+            width: 122,
+            marginRight: "5px",
+            alignItems: "center",
+            border: "1px solid #D9D9D9",
+            borderRadius: "8px",
           }}
-        />
-        <input
-          pattern="^[1-9]\d*$"
-          maxLength={`4`}
-          className="price_input"
-          placeholder="to:"
-          value={maxValue}
-          onChange={(e) => {
-            !e.target.value.length
-              ? setMaxValue(max)
-              : setMaxValue(e.target.value);
-          }}
-        />
+        >
+          <p style={{ fontSize: 14 }}>from:</p>
+          <input
+            pattern={`${minValue == 0 ? "[0-9]" : "^[1-9]\\d*$"}`}
+            maxLength={`4`}
+            className="price_input"
+            placeholder="from:"
+            value={minValue}
+            onChange={(e) => {
+              !e.target.value.length
+                ? setMinValue(min)
+                : setMinValue(e.target.value);
+            }}
+          />
+        </div>
+        <div>
+          <input
+            pattern="^[1-9]\d*$"
+            maxLength={`4`}
+            className="price_input"
+            placeholder="to:"
+            value={maxValue}
+            onChange={(e) => {
+              !e.target.value.length
+                ? setMaxValue(max)
+                : setMaxValue(e.target.value);
+            }}
+          />
+        </div>
       </div>
     </>
   );

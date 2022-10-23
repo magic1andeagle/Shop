@@ -1,6 +1,5 @@
 import React from "react";
-import FavouritesState from "./States/FavouritesState";
-import ItemState from "./States/ItemState";
+import FavouritesState from "../States/FavouritesState";
 
 const FavouriteItem = ({ id }) => {
 

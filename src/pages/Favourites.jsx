@@ -1,9 +1,7 @@
 import React from "react";
-import { useState } from "react";
 import FavouriteItem from "../Components/FavouriteItem";
-import ItemState from "../Components/States/ItemState";
 
-import FavouritesState from '../Components/States/FavouritesState'
+import FavouritesState from '../States/FavouritesState'
 
 import "../styles/pages/Favourite.css";
 import { observer } from "mobx-react-lite";

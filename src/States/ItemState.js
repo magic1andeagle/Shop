@@ -5,12 +5,14 @@ class ItemState {
   categoryItems = [];
   priceRateRangedItems = [];
   searchedItems = [];
+  displayType = 'card'
 
   constructor() {
     this.updateItems = this.updateItems.bind(this);
     this.setCategoryItems = this.setCategoryItems.bind(this);
     this.updatePriceRateRangedItems = this.updatePriceRateRangedItems.bind(this)
     this.updateSearchedItems = this.updateSearchedItems.bind(this)
+    this.setDisplayType = this.setDisplayType.bind(this)
     makeAutoObservable(this);
   }
 
@@ -28,6 +30,10 @@ class ItemState {
 
   updateSearchedItems(obj) {
     this.searchedItems = [...obj]
+  }
+
+  setDisplayType(type) {
+    this.displayType = type
   }
 }
 

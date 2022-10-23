@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "../styles/components/Header.css";
 import "../styles/components/Navbar.css";
 import Navbar from "./Navbar";
-import { Assets } from "./utils/assets";
+import { Assets } from "../utils/assets";
 
 const Header = () => {
   const { shopLogo } = Assets;

@@ -1,7 +1,5 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React from "react";
 import Slider from "./Slider";
-import SliderState from "../Components/States/SliderState";
 
 const SidebarMenu = ({ categories, setCategoryHandler, onSubmit }) => {
   const onCategoryClick = (e) => {

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Assets } from "./utils/assets";
+import { Assets } from "../utils/assets";
 
 const Navbar = () => {
   const route = useLocation();

@@ -3,9 +3,9 @@ import "../styles/pages/Cart.css";
 import Counter from "../Components/Counter";
 import { observer } from "mobx-react-lite";
 
-import CartState from "./States/CartState";
+import CartState from "../States/CartState";
 import { itemsContext } from "../context/context";
-import { Assets } from "./utils/assets";
+import { Assets } from "../utils/assets";
 
 const CartItem = observer(({ id }) => {
   const { cancelClose } = Assets

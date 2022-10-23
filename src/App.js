@@ -1,7 +1,7 @@
 import React from "react";
 
 import { BrowserRouter } from "react-router-dom";
-import AppRouter from "../src/Components/Router/AppRouter";
+import AppRouter from "../src/Router/AppRouter";
 
 import Header from "../src/Components/Header";
 

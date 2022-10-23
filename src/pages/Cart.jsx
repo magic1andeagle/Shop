@@ -1,13 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
-import ItemState from "../Components/States/ItemState";
+import React from "react";
 import CartItem from "../Components/CartItem";
 import { observer } from "mobx-react-lite";
 
-import { sportItemsContext } from "../context/context";
-import { useContext } from "react";
-
 import "../styles/pages/Cart.css";
-import CartState from "../Components/States/CartState";
+import CartState from "../States/CartState";
 
 const Cart = observer(() => {
   let { cartItems } = CartState;
