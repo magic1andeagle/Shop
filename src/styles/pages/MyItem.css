@@ -201,13 +201,20 @@
     height: 100%;
     justify-content: center;
     align-items: center;
-    margin-left: 50px;
+    margin-left: 45px;
 }
 
 .itemHoriz-photo-container img {
     max-width: 90%;
-    max-height: 90%;
+    max-height: 100%;
     image-rendering: crisp-edges;
+}
+
+.itemHoriz-buttons-wrapper {
+    display: flex;
+    align-items: center;
+    width: 200px;
+    height: 100%;
 }
 
 .itemHoriz-button {
@@ -215,7 +222,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 100%;
+    height: 65px;
     position: relative;
     background-color: #3D5A80;
 
@@ -235,10 +242,6 @@
     background-color: #4B6E9C;
     cursor: pointer;
  }
-
-.itemHoriz-buttons-wrapper {
-    height: 55px;
-}
 
 .items-categories {
     display: flex;
@@ -282,26 +285,24 @@
 
 .price_input_container {
     display: flex;
-    width: 122;
+    width: 122px;
     margin-right: 5px;
+    padding-left: 10px;
     align-items: center;
     border: 1px solid #D9D9D9;
     border-radius: 8px;
 }
 
-.price_input:focus {
-    border: 1px solid #3D5A80;
-}
-
 .price_input {
-    width: 100%;
+    width: 2ch;
     height: 30px;
+    border-radius: 8px;
     border: none;
     outline: none;
 }
 
-.price_input:invalid {
-    border: 1px solid red;
+.price_input_container_active {
+    border: 1px solid #3D5A80;
 }
 
 .price_range_inputs {

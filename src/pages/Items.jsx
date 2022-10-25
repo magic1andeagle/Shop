@@ -114,7 +114,7 @@ const Items = observer(() => {
             {items.length ? (
               items.map((item) => <Item key={item.id} data={item} />)
             ) : (
-              <div style={{ width: "100%", textAlign: "center" }}>
+              <div style={{ width: "100%", textAlign: "center", marginBottom: 15 }}>
                 <h1>По вашему запросу ничего не найдено</h1>
               </div>
             )}
@@ -125,7 +125,7 @@ const Items = observer(() => {
                 justifyContent: "center",
               }}
             >
-              <img src={paginationButton} alt="paginationButton" />
+              {items.length ? <img src={paginationButton} alt="paginationButton" /> : null}
             </div>
           </div>
         </div>

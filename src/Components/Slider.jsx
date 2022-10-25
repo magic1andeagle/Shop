@@ -49,6 +49,16 @@ const Slider = ({ min, max, type }) => {
       : updateRating(minValue, maxValue);
   }, [minValue, maxValue]);
 
+  useEffect(() => {
+    const input = document.querySelector('.price_input_min')
+    input.style.width = (minValueRef.current.length + 1) * 12 + "px"
+  }, [minValue])
+
+  useEffect(() => {
+    const input = document.querySelector('.price_input_max')
+    input.style.width = (maxValueRef.current.length + 1) * 12 + "px"
+  }, [maxValue])
+
   return (
     <>
       <div className="slider_container">
@@ -85,22 +95,15 @@ const Slider = ({ min, max, type }) => {
         </div>
       </div>
       <div className="price_range_inputs">
-        <div
-          className="price_input_container"
-          style={{
-            display: "flex",
-            width: 122,
-            marginRight: "5px",
-            alignItems: "center",
-            border: "1px solid #D9D9D9",
-            borderRadius: "8px",
-          }}
-        >
+        <div className={`price_input_container`}>
           <p style={{ fontSize: 14 }}>from:</p>
           <input
+            onFocus={(e) => e.target.parentElement.classList.add('price_input_container_active')}
+            onBlur={(e) => e.target.parentElement.classList.toggle('price_input_container_active')}
+            onInput={(e) => e.target.style.width = ((e.target.value.length + 1) * 7) + 'px'}
             pattern={`${minValue == 0 ? "[0-9]" : "^[1-9]\\d*$"}`}
             maxLength={`4`}
-            className="price_input"
+            className="price_input price_input_min"
             placeholder="from:"
             value={minValue}
             onChange={(e) => {
@@ -109,12 +112,17 @@ const Slider = ({ min, max, type }) => {
                 : setMinValue(e.target.value);
             }}
           />
+          <p>Р.</p>
         </div>
-        <div>
+        <div className="price_input_container">
+          <p style={{ fontSize: 14 }}>to:</p>
           <input
+            onFocus={(e) => e.target.parentElement.classList.add('price_input_container_active')}
+            onBlur={(e) => e.target.parentElement.classList.toggle('price_input_container_active')}
+            onInput={(e) => e.target.style.width = ((e.target.value.length + 1) * 7) + 'px'}
             pattern="^[1-9]\d*$"
             maxLength={`4`}
-            className="price_input"
+            className="price_input price_input_max"
             placeholder="to:"
             value={maxValue}
             onChange={(e) => {
@@ -123,6 +131,7 @@ const Slider = ({ min, max, type }) => {
                 : setMaxValue(e.target.value);
             }}
           />
+          <p>Р.</p>
         </div>
       </div>
     </>

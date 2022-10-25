@@ -26,11 +26,11 @@ const Counter = observer(({ getNum, id, data }) => {
   return (
     <div className="item-cart-counter">
       <div className="item-cart-counter-container">
-        <div onClick={() => decrement(id)} className="counter-button-decrement">
+        <div onClick={() => decrement(id)} className="counter-button">
           -
         </div>
         <div className="item-cart-counter-value">{counterValue}</div>
-        <div onClick={() => increment(id)} className="counter-button-increment">
+        <div onClick={() => increment(id)} className="counter-button">
           +
         </div>
       </div>
