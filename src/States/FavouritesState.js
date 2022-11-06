@@ -4,6 +4,8 @@ class FavouritesState {
     favouriteItems = []
 
     constructor() {
+        this.addFavourite = this.addFavourite.bind(this)
+        this.removeFavourite = this.removeFavourite.bind(this)
         makeAutoObservable(this)
     }
 

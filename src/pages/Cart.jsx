@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import CartItem from "../Components/CartItem";
 import { observer } from "mobx-react-lite";
+import { useNavigate } from "react-router-dom";
 
 import "../styles/pages/Cart.css";
 import CartState from "../States/CartState";
@@ -8,6 +9,7 @@ import CartState from "../States/CartState";
 const Cart = observer(() => {
   let { cartItems } = CartState;
   let totalCartValue = 0;
+  const navigate = useNavigate();
 
   const [input, setInput] = useState("");
   const [shippingPrice, setShippingPrice] = useState({ value: 0 });
@@ -16,6 +18,12 @@ const Cart = observer(() => {
     <div className="cart">
       <div className="cart-container">
         <div className="cart-main-section">
+          <p
+            style={{ color: "gray", cursor: "pointer" }}
+            onClick={() => navigate("/")}
+          >
+            Back to shop
+          </p>
           <div className="cart-header">
             <h1 style={{ fontSize: 36 }}>Shopping Cart</h1>
             <p className="cart-items-quantity">{cartItems.length} items</p>
@@ -73,7 +81,7 @@ const Cart = observer(() => {
             <div style={{ marginBottom: 30 }} className="cart-coupon">
               <h4 style={{ marginBottom: 15 }}>Coupon</h4>
               <input
-              className="cart-coupon-input"
+                className="cart-coupon-input"
                 type="text"
                 placeholder="Enter your coupon"
                 value={input}
@@ -90,7 +98,11 @@ const Cart = observer(() => {
               </h4>
             </div>
 
-            <button className="chechkout-button" style={{ marginTop: 60 }} onClick={() => CartState.removeAllCart()}>
+            <button
+              className="chechkout-button"
+              style={{ marginTop: 60 }}
+              onClick={() => CartState.removeAllCart()}
+            >
               CHECKOUT
             </button>
           </div>

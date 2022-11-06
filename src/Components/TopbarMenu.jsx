@@ -9,8 +9,6 @@ const TopbarMenu = ({ items, setState }) => {
   const { rowType, columnType } = Assets;
   const { displayType, setDisplayType } = ItemState
 
-  console.log(items)
-
   return (
     <div className="topBarMenuContainer">
       <SearchQuery items={items} setState={setState} />

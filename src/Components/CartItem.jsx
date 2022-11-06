@@ -12,7 +12,7 @@ const CartItem = observer(({ id }) => {
   const { cancelClose } = Assets;
   const { cartItems } = CartState;
   const { title, price, data, image, category } = cartItems.find(
-    (item) => item.id == id
+    (item) => item.id === id
   );
 
   const getCurrentNumber = (currentValue) => {
