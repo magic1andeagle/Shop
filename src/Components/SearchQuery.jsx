@@ -4,9 +4,9 @@ import magnifier from "../assets/magnifier.svg";
 import "../styles/components/SearchQuery.css";
 import { useSearch } from "../hooks/useSearch";
 
-const SearchQuery = ({ items, setState }) => {
+const SearchQuery = () => {
   const [value, setValue] = useState("");
-  useSearch(value, items, setState);
+  useSearch(value);
 
   const onMagnifierClick = () => {
     // ДОБАВИТЬ МОДАЛКУ ДЛЯ НАЙДЕННЫХ ТОВАРОВ

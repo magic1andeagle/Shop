@@ -5,7 +5,7 @@ export default class ItemService {
     try {
       const response = await axios
         .get("https://fakestoreapi.com/products")
-        .then(resp => resp.data);
+        .then((resp) => resp.data);
       return response;
     } catch (error) {
       console.log(error);
@@ -14,12 +14,11 @@ export default class ItemService {
   static async getCategories() {
     try {
       const response = await axios
-        .get('https://fakestoreapi.com/products/categories')
-        .then(response => response.data)
-      return response
-    }
-    catch (error) {
-      console.log(error)
+        .get("https://fakestoreapi.com/products/categories")
+        .then((response) => response.data);
+      return response;
+    } catch (error) {
+      console.log(error);
     }
   }
 }

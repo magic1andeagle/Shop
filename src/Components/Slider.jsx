@@ -100,7 +100,7 @@ const Slider = ({ min, max, type }) => {
           <input
             onFocus={(e) => e.target.parentElement.classList.add('price_input_container_active')}
             onBlur={(e) => e.target.parentElement.classList.toggle('price_input_container_active')}
-            onInput={(e) => e.target.style.width = ((e.target.value.length + 1) * 7) + 'px'}
+            onKeyDown={(e) => e.target.style.width = e.target.value.length + 'ch'}
             pattern={`${minValue == 0 ? "[0-9]" : "^[1-9]\\d*$"}`}
             maxLength={`4`}
             className="price_input price_input_min"

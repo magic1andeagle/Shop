@@ -7,16 +7,19 @@ import ItemState from "../States/ItemState";
 
 const TopbarMenu = ({ items, setState }) => {
   const { rowType, columnType } = Assets;
-  const { displayType, setDisplayType } = ItemState
+  const { displayType, setDisplayType } = ItemState;
 
   return (
     <div className="topBarMenuContainer">
       <SearchQuery items={items} setState={setState} />
       <div className={`displayTypeMenu`}>
-        <div onClick={() => setDisplayType('horizBlock')} className={`displayOption`}>
+        <div
+          onClick={() => setDisplayType("horizBlock")}
+          className={`displayOption`}
+        >
           <img src={columnType} />
         </div>
-        <div onClick={() => setDisplayType('card')} className={`displayOption`}>
+        <div onClick={() => setDisplayType("card")} className={`displayOption`}>
           <img src={rowType} />
         </div>
       </div>
