@@ -12,13 +12,7 @@ export const useSearch = (searchQuery) => {
   const { searchItems } = searchedItemsSlice.actions;
   const dispatch = useDispatch();
 
-  const { searchedItems: searchedItems1 } = useSelector(
-    (state) => state.searchedItems
-  );
-
-  console.log(searchedItems1);
-
-  const searchedItems = useMemo(() => {
+  const getSearchedItems = useMemo(() => {
     setTimeout(
       () =>
         categoryItems?.length
@@ -40,5 +34,5 @@ export const useSearch = (searchQuery) => {
     );
   }, [searchQuery]);
 
-  return searchedItems;
+  return getSearchedItems;
 };

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { itemsAPI } from "../services/ItemService";
 import Slider from "./Slider";
 import SliderWrapper from "./SliderWrapper";
@@ -6,19 +6,40 @@ import "../styles/components/Categories.css";
 import { useDispatch, useSelector } from "react-redux";
 import { categoriesSlice } from "../store/reducers/categoryItemsReducer";
 
-const SidebarMenu = ({ onSubmit }) => {
+const SidebarMenu = () => {
   const { data: categoriesData } = itemsAPI.useFetchCategoriesQuery();
+  const { data: initItems } = itemsAPI.useFetchItemsQuery();
   const dispatch = useDispatch();
   const { categoryItems } = useSelector((state) => state.categoryItems);
-  const { setCategoryItems } = categoriesSlice.actions;
+  const { setActiveCategories, setCategoryItems, priceRateFilter } =
+    categoriesSlice.actions;
+
+  const priceSettings = useRef(null);
+  const ratingSettings = useRef(null);
 
   const onCategoryClick = (e) => {
     e.target.classList.toggle("chosen_category");
     console.log(e.target.innerHTML.slice(5));
-    dispatch(setCategoryItems(e.target.innerHTML.slice(5)));
+    dispatch(setActiveCategories(e.target.innerHTML.slice(5)));
   };
 
-  console.log(categoryItems);
+  const priceFilterSettings = (priceSettings, ratingSettings) => ({
+    priceFilter: {
+      minPrice: priceSettings.current.minValue,
+      maxPrice: priceSettings.current.maxValue,
+    },
+    ratingFilter: {
+      minRating: ratingSettings.current.minValue,
+      maxRating: ratingSettings.current.maxValue,
+    },
+  });
+
+  const onSubmit = () => {
+    dispatch(setCategoryItems(initItems));
+    dispatch(
+      priceRateFilter(priceFilterSettings(priceSettings, ratingSettings))
+    );
+  };
 
   return (
     <div className="sidebar_menu">
@@ -36,7 +57,10 @@ const SidebarMenu = ({ onSubmit }) => {
               </div>
             ))}
         </div>
-        <SliderWrapper />
+        <SliderWrapper
+          priceSettings={priceSettings}
+          ratingSettings={ratingSettings}
+        />
         <button onClick={() => onSubmit()} className="applyButton">
           <p>Найти</p>
         </button>

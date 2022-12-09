@@ -2,8 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   searchedItems: [],
-  loading: false,
-  error: "",
+  searchError: "",
 };
 
 export const searchedItemsSlice = createSlice({
@@ -11,7 +10,9 @@ export const searchedItemsSlice = createSlice({
   initialState,
   reducers: {
     searchItems(state, action) {
-      state.searchedItems = [...action.payload];
+      state.searchError
+        ? (state.searchError = "По вашему запросу ничего не найдено")
+        : (state.searchedItems = action.payload);
     },
   },
 });

@@ -15,6 +15,8 @@ const Items = observer(() => {
   const [items, setItems] = useState([]);
   const { paginationButton } = Assets;
 
+  console.log(itemsData);
+
   return (
     <>
       <div
