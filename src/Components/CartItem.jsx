@@ -1,10 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/pages/Cart.css";
 import Counter from "../Components/Counter";
 import { observer } from "mobx-react-lite";
 
 import CartState from "../States/CartState";
-import { itemsContext } from "../context/context";
 import { Assets } from "../utils/assets";
 
 const CartItem = observer(({ id }) => {
@@ -38,7 +37,7 @@ const CartItem = observer(({ id }) => {
             </p>
             <p style={{ fontSize: 24, fontWeight: 600 }}>{title}</p>
           </div>
-          <div style={{ display: 'flex' }}>
+          <div style={{ display: "flex" }}>
             <Counter getNum={getCurrentNumber} id={id} data={data}></Counter>
             <div className="item-cart-price">
               {totalItemPrice.toFixed(2) + `$`}

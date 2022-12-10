@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Item from "../Components/Item";
 import SidebarMenu from "../Components/SidebarMenu";
 import TopbarMenu from "../Components/TopbarMenu";
@@ -8,14 +8,18 @@ import "../styles/pages/MyItem.css";
 import { Assets } from "../utils/assets";
 import Loader from "../Components/Loader";
 import { itemsAPI } from "../services/ItemService";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { itemsSlice } from "../store/reducers/itemsReducer";
 
 const Items = observer(() => {
+  const dispatch = useDispatch();
   const { data: itemsData, error, isLoading } = itemsAPI.useFetchItemsQuery();
-  const [items, setItems] = useState([]);
+  const { setInitialItems } = itemsSlice.actions;
   const { paginationButton } = Assets;
 
-  console.log(itemsData);
+  useEffect(() => {
+    dispatch(setInitialItems(itemsData));
+  }, [itemsData]);
 
   return (
     <>
@@ -44,7 +48,7 @@ const Items = observer(() => {
                 justifyContent: "center",
               }}
             >
-              {items?.length ? (
+              {itemsData?.length ? (
                 <img src={paginationButton} alt="paginationButton" />
               ) : null}
             </div>

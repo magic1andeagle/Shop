@@ -1,13 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 import { itemsAPI } from "../services/ItemService";
-import categoriesReducer from "./reducers/categoryItemsReducer";
-import searchedItemsReducer from "./reducers/searchedItemsReducer";
+import itemsReducer from "./reducers/itemsReducer";
 
 const rootStore = combineReducers({
-  //  items: initItemsReducer,
-  searchedItems: searchedItemsReducer,
-  categoryItems: categoriesReducer,
+  items: itemsReducer,
   [itemsAPI.reducerPath]: itemsAPI.reducer,
 });
 

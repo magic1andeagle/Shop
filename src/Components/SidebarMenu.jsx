@@ -1,18 +1,21 @@
 import React, { useEffect, useRef } from "react";
 import { itemsAPI } from "../services/ItemService";
-import Slider from "./Slider";
 import SliderWrapper from "./SliderWrapper";
 import "../styles/components/Categories.css";
 import { useDispatch, useSelector } from "react-redux";
-import { categoriesSlice } from "../store/reducers/categoryItemsReducer";
+import { itemsSlice } from "../store/reducers/itemsReducer";
 
 const SidebarMenu = () => {
   const { data: categoriesData } = itemsAPI.useFetchCategoriesQuery();
   const { data: initItems } = itemsAPI.useFetchItemsQuery();
   const dispatch = useDispatch();
-  const { categoryItems } = useSelector((state) => state.categoryItems);
-  const { setActiveCategories, setCategoryItems, priceRateFilter } =
-    categoriesSlice.actions;
+  const { searchedItems, categoryItems } = useSelector((state) => state.items);
+  const {
+    setActiveCategories,
+    setCategoryItems,
+    priceRateFilter,
+    setSearchedItems,
+  } = itemsSlice.actions;
 
   const priceSettings = useRef(null);
   const ratingSettings = useRef(null);
@@ -34,7 +37,10 @@ const SidebarMenu = () => {
     },
   });
 
+  //продумать логику
+
   const onSubmit = () => {
+    //if (searchedItems)
     dispatch(setCategoryItems(initItems));
     dispatch(
       priceRateFilter(priceFilterSettings(priceSettings, ratingSettings))

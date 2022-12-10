@@ -1,20 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { filterItems, useFilter } from "../../hooks/useFilter";
+import { filterItems } from "../../hooks/useFilter";
 
 const initialState = {
+  initialItems: [],
+  filteredItems: [],
   activeCategories: [],
   categoryItems: [],
-  filteredItems: [],
-  //  filterSettings: {
-  //    priceFilter: {},
-  //    ratingFilter: {},
-  //  },
+  searchedItems: [],
+  searchError: "",
 };
 
-export const categoriesSlice = createSlice({
-  name: "categories",
+export const itemsSlice = createSlice({
+  name: "itemsSlice",
   initialState,
   reducers: {
+    setInitialItems(state, action) {
+      state.initialItems = action.payload;
+    },
     setActiveCategories(state, action) {
       if (!state.activeCategories.includes(action.payload)) {
         state.activeCategories = [...state.activeCategories, action.payload];
@@ -32,10 +34,6 @@ export const categoriesSlice = createSlice({
         )
       );
     },
-    //    getFilterSettings(state, action) {
-    //      state.filterSettings.priceFilter = action.payload.priceFilter;
-    //      state.filterSettings.ratingFilter = action.payload.ratingFilter;
-    //    },
     priceRateFilter(state, action) {
       const { minPrice, maxPrice } = action.payload.priceFilter;
       const { minRating, maxRating } = action.payload.ratingFilter;
@@ -48,11 +46,25 @@ export const categoriesSlice = createSlice({
           minRating,
           maxRating
         );
-        state.categoryItems = filteredData;
+        state.filteredItems = filteredData;
       } else {
+        const filteredData = filterItems(
+          state.initialItems,
+          minPrice,
+          maxPrice,
+          minRating,
+          maxRating
+        );
+        state.filteredItems = filteredData;
       }
+    },
+    setSearchedItems(state, action) {
+      state.searchedItems = action.payload;
+    },
+    setFilteredItems(state, action) {
+      state.filteredItems = action.payload;
     },
   },
 });
 
-export default categoriesSlice.reducer;
+export default itemsSlice.reducer;
