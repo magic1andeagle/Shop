@@ -8,6 +8,7 @@ const initialState = {
   categoryItems: [],
   searchedItems: [],
   searchError: "",
+  areFiltersSet: false,
 };
 
 export const itemsSlice = createSlice({
@@ -38,6 +39,18 @@ export const itemsSlice = createSlice({
       const { minPrice, maxPrice } = action.payload.priceFilter;
       const { minRating, maxRating } = action.payload.ratingFilter;
 
+      if (state.searchedItems?.length) {
+        const filteredData = filterItems(
+          state.searchedItems,
+          minPrice,
+          maxPrice,
+          minRating,
+          maxRating
+        );
+        state.filteredItems = filteredData;
+        state.searchedItems = filteredData;
+        return;
+      }
       if (state.categoryItems.length) {
         const filteredData = filterItems(
           state.categoryItems,
@@ -60,9 +73,13 @@ export const itemsSlice = createSlice({
     },
     setSearchedItems(state, action) {
       state.searchedItems = action.payload;
+      state.filteredItems = action.payload;
     },
     setFilteredItems(state, action) {
       state.filteredItems = action.payload;
+    },
+    setFiltersState(state, action) {
+      state.areFiltersSet = action.payload;
     },
   },
 });

@@ -14,11 +14,22 @@ const SidebarMenu = () => {
     setActiveCategories,
     setCategoryItems,
     priceRateFilter,
-    setSearchedItems,
+    setFiltersState,
   } = itemsSlice.actions;
 
   const priceSettings = useRef(null);
   const ratingSettings = useRef(null);
+
+  const defaultSettings = {
+    priceFilter: {
+      minPrice: 0,
+      maxPrice: 1000,
+    },
+    ratingFilter: {
+      minRating: 1,
+      maxRating: 5,
+    },
+  };
 
   const onCategoryClick = (e) => {
     e.target.classList.toggle("chosen_category");
@@ -37,11 +48,23 @@ const SidebarMenu = () => {
     },
   });
 
+  const isDefault = (def, current) => {
+    if (JSON.stringify(def) === JSON.stringify(current)) {
+      dispatch(setFiltersState(false)); // means that filters are set to default
+    } else dispatch(setFiltersState(true));
+  };
+
   //продумать логику
 
   const onSubmit = () => {
-    //if (searchedItems)
+    isDefault(
+      defaultSettings,
+      priceFilterSettings(priceSettings, ratingSettings)
+    );
     dispatch(setCategoryItems(initItems));
+    //  if (searchedItems?.length) {
+    //    dispatch(setCategoryItems(searchedItems));
+    //  }
     dispatch(
       priceRateFilter(priceFilterSettings(priceSettings, ratingSettings))
     );

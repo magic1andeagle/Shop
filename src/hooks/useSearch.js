@@ -5,28 +5,35 @@ import { itemsSlice } from "../store/reducers/itemsReducer";
 
 export const useSearch = (searchQuery) => {
   const { data: items } = itemsAPI.useFetchItemsQuery();
-  const { categoryItems } = useSelector((state) => state.items);
-  const { setFilteredItems } = itemsSlice.actions;
+  const { categoryItems, areFiltersSet, filteredItems } = useSelector(
+    (state) => state.items
+  );
+  const { setSearchedItems, setFilteredItems } = itemsSlice.actions;
   const dispatch = useDispatch();
 
   const getSearchedItems = useMemo(() => {
     setTimeout(() => {
+      if (!searchQuery.length) {
+        dispatch(setSearchedItems([]));
+        return;
+      }
+      if (areFiltersSet) {
+        const data = filteredItems?.filter((item) =>
+          item.title.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        dispatch(setSearchedItems(data));
+        return;
+      }
       if (categoryItems?.length) {
-        dispatch(
-          setFilteredItems(
-            categoryItems?.filter((item) =>
-              item.title.toLowerCase().includes(searchQuery.toLowerCase())
-            )
-          )
+        const data = categoryItems?.filter((item) =>
+          item.title.toLowerCase().includes(searchQuery.toLowerCase())
         );
+        dispatch(setSearchedItems(data));
       } else {
-        dispatch(
-          setFilteredItems(
-            items?.filter((item) =>
-              item.title.toLowerCase().includes(searchQuery.toLowerCase())
-            )
-          )
+        const data = items?.filter((item) =>
+          item.title.toLowerCase().includes(searchQuery.toLowerCase())
         );
+        dispatch(setSearchedItems(data));
       }
     }, 0);
   }, [searchQuery]);
