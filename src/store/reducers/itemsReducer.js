@@ -9,6 +9,7 @@ const initialState = {
   searchedItems: [],
   searchError: "",
   areFiltersSet: false,
+  cardType: "",
 };
 
 export const itemsSlice = createSlice({
@@ -28,20 +29,22 @@ export const itemsSlice = createSlice({
       }
     },
     setCategoryItems(state, action) {
-      state.categoryItems = action.payload.filter((item) =>
+      const data = action.payload.filter((item) =>
         state.activeCategories.some(
           (category) =>
             item.category === category[0].toLowerCase() + category.slice(1)
         )
       );
+      state.categoryItems = data;
+      state.filteredItems = data;
     },
     priceRateFilter(state, action) {
       const { minPrice, maxPrice } = action.payload.priceFilter;
       const { minRating, maxRating } = action.payload.ratingFilter;
 
-      if (state.searchedItems?.length) {
+      if (state.searchedItems?.length && state.areFiltersSet) {
         const filteredData = filterItems(
-          state.searchedItems,
+          state.initialItems,
           minPrice,
           maxPrice,
           minRating,
@@ -80,6 +83,9 @@ export const itemsSlice = createSlice({
     },
     setFiltersState(state, action) {
       state.areFiltersSet = action.payload;
+    },
+    setCardType(state, action) {
+      state.cardType = action.payload;
     },
   },
 });

@@ -4,10 +4,13 @@ import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
 
 import "../styles/pages/Cart.css";
-import CartState from "../States/CartState";
+import { useDispatch, useSelector } from "react-redux";
+import { addedItemsSlice } from "../store/reducers/addedItemsReducer";
 
 const Cart = observer(() => {
-  let { cartItems } = CartState;
+  const dispatch = useDispatch();
+  const { cartItems } = useSelector((state) => state.addedItems);
+  const { clearCart } = addedItemsSlice.actions;
   let totalCartValue = 0;
   const navigate = useNavigate();
 
@@ -26,10 +29,10 @@ const Cart = observer(() => {
           </p>
           <div className="cart-header">
             <h1 style={{ fontSize: 36 }}>Shopping Cart</h1>
-            <p className="cart-items-quantity">{cartItems.length} items</p>
+            <p className="cart-items-quantity">{cartItems?.length} items</p>
           </div>
 
-          {cartItems.map(
+          {cartItems?.map(
             (item) => (
               (totalCartValue += item.price * item.quantity),
               (<CartItem key={item.id} id={item.id} />)
@@ -101,7 +104,7 @@ const Cart = observer(() => {
             <button
               className="chechkout-button"
               style={{ marginTop: 60 }}
-              onClick={() => CartState.removeAllCart()}
+              onClick={() => dispatch(clearCart())}
             >
               CHECKOUT
             </button>

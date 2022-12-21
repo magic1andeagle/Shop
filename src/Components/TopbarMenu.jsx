@@ -4,22 +4,30 @@ import { Assets } from "../utils/assets";
 
 import "../styles/components/Topbarmenu.css";
 import ItemState from "../States/ItemState";
+import { useDispatch } from "react-redux";
+import { addedItemsSlice } from "../store/reducers/addedItemsReducer";
+import { itemsSlice } from "../store/reducers/itemsReducer";
 
 const TopbarMenu = ({ items, setState }) => {
+  const dispatch = useDispatch();
+  const { setCardType } = itemsSlice.actions;
   const { rowType, columnType } = Assets;
-  const { displayType, setDisplayType } = ItemState;
+  const { setDisplayType } = ItemState;
 
   return (
     <div className="topBarMenuContainer">
       <SearchQuery items={items} setState={setState} />
       <div className={`displayTypeMenu`}>
         <div
-          onClick={() => setDisplayType("horizBlock")}
+          onClick={() => dispatch(setCardType("horizBlock"))}
           className={`displayOption`}
         >
           <img src={columnType} />
         </div>
-        <div onClick={() => setDisplayType("card")} className={`displayOption`}>
+        <div
+          onClick={() => dispatch(setCardType("card"))}
+          className={`displayOption`}
+        >
           <img src={rowType} />
         </div>
       </div>

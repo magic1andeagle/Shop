@@ -1,22 +1,24 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import CartState from "../States/CartState";
-import FavouritesState from "../States/FavouritesState";
+import { useDispatch, useSelector } from "react-redux";
 import ItemState from "../States/ItemState";
+import { addedItemsSlice } from "../store/reducers/addedItemsReducer";
 import { Assets } from "../utils/assets";
 
 const Item = observer(({ data }) => {
+  const dispatch = useDispatch();
+  const { cardType } = useSelector((state) => state.items);
+  const { addToCart, addToFavourite } = addedItemsSlice.actions;
   const { title, price, image, rating } = data;
   const { favouritesItem, shoppingCart, star } = Assets;
-  const { displayType } = ItemState;
 
   return (
     <>
-      {displayType === "horizBlock" ? (
+      {cardType === "horizBlock" ? (
         <div className="itemHoriz">
           <div className="itemHoriz-container">
             <img
-              onClick={() => FavouritesState.addFavourite(data)}
+              onClick={() => dispatch(addToFavourite(data))}
               className="like-item"
               src={favouritesItem}
             />
@@ -57,7 +59,7 @@ const Item = observer(({ data }) => {
               <div className="itemHoriz-buttons-wrapper">
                 <button
                   className="itemHoriz-button"
-                  onClick={() => CartState.addToCart(data)}
+                  onClick={() => dispatch(addToCart(data))}
                 >
                   Add to cart
                   <img style={{ marginLeft: 13 }} src={shoppingCart}></img>
@@ -71,7 +73,7 @@ const Item = observer(({ data }) => {
           <div className="item-container">
             <div>
               <img
-                onClick={() => FavouritesState.addFavourite(data)}
+                onClick={() => dispatch(addToFavourite(data))}
                 className="like-item"
                 src={favouritesItem}
               />
@@ -102,7 +104,7 @@ const Item = observer(({ data }) => {
               <div className="button-wrapper">
                 <button
                   className="item-button"
-                  onClick={() => CartState.addToCart(data)}
+                  onClick={() => dispatch(addToCart(data))}
                 >
                   Add to cart
                   <img style={{ marginLeft: 13 }} src={shoppingCart}></img>

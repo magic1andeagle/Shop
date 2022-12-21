@@ -1,27 +1,32 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import CartState from "../States/CartState";
+import { useDispatch } from "react-redux";
+import { addedItemsSlice } from "../store/reducers/addedItemsReducer";
 
-const Counter = observer(({ getNum, id, data }) => {
-  const [counterValue, setCounterValue] = useState(1)
+const Counter = observer(({ getNum, id }) => {
+  const dispatch = useDispatch();
+  const { deleteFromCart, incrementQuantity, decrementQuantity } =
+    addedItemsSlice.actions;
+  const [counterValue, setCounterValue] = useState(1);
 
   const increment = (id) => {
-    setCounterValue(prev => prev + 1)
-    CartState.incrQuantity(id)
-  }
+    setCounterValue((prev) => prev + 1);
+    dispatch(incrementQuantity(id));
+  };
 
   const decrement = (id) => {
     if (counterValue - 1 == 0) {
-      CartState.removeFromCart(id)
-      return
+      dispatch(deleteFromCart(id));
+      return;
     }
-    setCounterValue(prev => prev - 1)
-    CartState.decrQuantity(id)
-  }
+    setCounterValue((prev) => prev - 1);
+    dispatch(decrementQuantity(id));
+  };
 
   useEffect(() => {
-    getNum(counterValue)
-  }, [increment, decrement])
+    getNum(counterValue);
+  }, [increment, decrement]);
 
   return (
     <div className="item-cart-counter">

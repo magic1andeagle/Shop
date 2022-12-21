@@ -1,13 +1,16 @@
 import React from "react";
 import FavouritesState from "../States/FavouritesState";
 import { Assets } from "../utils/assets";
+import { useDispatch, useSelector } from "react-redux";
+import { addedItemsSlice } from "../store/reducers/addedItemsReducer";
 
-const FavouriteItem = ({ id }) => {
-  const { favouriteItems, removeFavourite } = FavouritesState;
+const FavouriteItem = ({ data }) => {
+  const dispatch = useDispatch();
+  const { favouriteItems } = useSelector((state) => state.addedItems);
+  const { deleteFromFavourite } = addedItemsSlice.actions;
+  const { removeFavourite } = FavouritesState;
   const { favouritesItem } = Assets;
-  const { title, price, data, image, category } = favouriteItems.find(
-    (item) => item.id === id
-  );
+  const { title, price, image, category, id } = data;
 
   return (
     <div className="favourite-item">
@@ -35,7 +38,7 @@ const FavouriteItem = ({ id }) => {
           <div className="delete-fav-button">
             <img
               style={{ cursor: "pointer" }}
-              onClick={() => removeFavourite(id)}
+              onClick={() => dispatch(deleteFromFavourite(id))}
               src={favouritesItem}
               alt="favItemDel"
             />

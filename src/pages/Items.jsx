@@ -8,17 +8,22 @@ import "../styles/pages/MyItem.css";
 import { Assets } from "../utils/assets";
 import Loader from "../Components/Loader";
 import { itemsAPI } from "../services/ItemService";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { itemsSlice } from "../store/reducers/itemsReducer";
 
 const Items = observer(() => {
   const dispatch = useDispatch();
   const { data: itemsData, error, isLoading } = itemsAPI.useFetchItemsQuery();
+  const { initialItems } = useSelector((state) => state.items);
   const { setInitialItems } = itemsSlice.actions;
   const { paginationButton } = Assets;
 
   useEffect(() => {
-    dispatch(setInitialItems(itemsData));
+    dispatch(
+      setInitialItems(
+        itemsData?.map((item) => (item = { ...item, quantity: 1 }))
+      )
+    );
   }, [itemsData]);
 
   return (
@@ -32,8 +37,8 @@ const Items = observer(() => {
           <TopbarMenu />
           <div className="items-main">
             {isLoading && <Loader />}
-            {itemsData?.length ? (
-              itemsData.map((item) => <Item key={item.id} data={item} />)
+            {initialItems?.length ? (
+              initialItems.map((item) => <Item key={item.id} data={item} />)
             ) : (
               <div
                 style={{ width: "100%", textAlign: "center", marginBottom: 15 }}
