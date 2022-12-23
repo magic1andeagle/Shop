@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
-import CartState from "../States/CartState";
 import { useDispatch } from "react-redux";
-import { addedItemsSlice } from "../store/reducers/addedItemsReducer";
+import { addedItemsSlice } from "../../store/reducers/addedItemsReducer";
 
 const Counter = observer(({ getNum, id }) => {
   const dispatch = useDispatch();
@@ -16,7 +15,7 @@ const Counter = observer(({ getNum, id }) => {
   };
 
   const decrement = (id) => {
-    if (counterValue - 1 == 0) {
+    if (counterValue - 1 === 0) {
       dispatch(deleteFromCart(id));
       return;
     }

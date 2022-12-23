@@ -32,7 +32,11 @@
     padding-right: 40px;
 }
 
-
+.backToShop {
+    color: gray;
+    cursor: pointer;
+    width: fit-content;
+}
 
 .item-cart-photo {
     display: flex;

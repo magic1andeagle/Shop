@@ -1,6 +1,5 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
-import "../styles/components/Slider.css";
-import SliderState from "../States/SliderState";
+import "../../styles/components/Slider.css";
 
 const Slider = ({ min, max, type, reference }) => {
   const [minValue, setMinValue] = useState(min);
@@ -8,8 +7,6 @@ const Slider = ({ min, max, type, reference }) => {
   const minValueRef = useRef(min);
   const maxValueRef = useRef(max);
   const range = useRef(null);
-
-  const { updatePrice, updateRating } = SliderState;
 
   const getPercent = useCallback(
     (value) => Math.round(((value - min) / (max - min)) * 100),
@@ -108,10 +105,7 @@ const Slider = ({ min, max, type, reference }) => {
                 "price_input_container_active"
               )
             }
-            onKeyDown={(e) =>
-              (e.target.style.width = e.target.value.length + "ch")
-            }
-            pattern={`${minValue == 0 ? "[0-9]" : "^[1-9]\\d*$"}`}
+            pattern={`${minValue === 0 ? "[0-9]" : "^[1-9]\\d*$"}`}
             maxLength={`4`}
             className="price_input price_input_min"
             placeholder="from:"
@@ -122,7 +116,6 @@ const Slider = ({ min, max, type, reference }) => {
                 : setMinValue(e.target.value);
             }}
           />
-          <p>Р.</p>
         </div>
         <div className="price_input_container">
           <p style={{ fontSize: 14 }}>to:</p>
@@ -137,9 +130,6 @@ const Slider = ({ min, max, type, reference }) => {
                 "price_input_container_active"
               )
             }
-            onInput={(e) =>
-              (e.target.style.width = (e.target.value.length + 1) * 7 + "px")
-            }
             pattern="^[1-9]\d*$"
             maxLength={`4`}
             className="price_input price_input_max"
@@ -151,7 +141,6 @@ const Slider = ({ min, max, type, reference }) => {
                 : setMaxValue(e.target.value);
             }}
           />
-          <p>Р.</p>
         </div>
       </div>
     </>

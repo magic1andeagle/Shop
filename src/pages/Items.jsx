@@ -6,15 +6,15 @@ import TopbarMenu from "../Components/TopbarMenu";
 
 import "../styles/pages/MyItem.css";
 import { Assets } from "../utils/assets";
-import Loader from "../Components/Loader";
+import Loader from "../Components/UI/Loader";
 import { itemsAPI } from "../services/ItemService";
 import { useDispatch, useSelector } from "react-redux";
 import { itemsSlice } from "../store/reducers/itemsReducer";
 
 const Items = observer(() => {
   const dispatch = useDispatch();
-  const { data: itemsData, error, isLoading } = itemsAPI.useFetchItemsQuery();
-  const { initialItems } = useSelector((state) => state.items);
+  const { data: itemsData, isLoading } = itemsAPI.useFetchItemsQuery();
+  const { filteredItems } = useSelector((state) => state.items);
   const { setInitialItems } = itemsSlice.actions;
   const { paginationButton } = Assets;
 
@@ -28,34 +28,23 @@ const Items = observer(() => {
 
   return (
     <>
-      <div
-        style={{ display: "flex", justifyContent: "space-between" }}
-        className="items-wrapper"
-      >
+      <div className="items-wrapper">
         <SidebarMenu />
         <div className="items-container">
           <TopbarMenu />
           <div className="items-main">
             {isLoading && <Loader />}
-            {initialItems?.length ? (
-              initialItems.map((item) => <Item key={item.id} data={item} />)
-            ) : (
-              <div
-                style={{ width: "100%", textAlign: "center", marginBottom: 15 }}
-              >
+            {!isLoading && !filteredItems?.length && (
+              <div className="items-main-nothing">
                 <h1>По вашему запросу ничего не найдено</h1>
               </div>
             )}
-            <div
-              style={{
-                display: "flex",
-                width: "100%",
-                justifyContent: "center",
-              }}
-            >
-              {itemsData?.length ? (
+            {filteredItems?.length &&
+              filteredItems.map((item) => <Item key={item.id} data={item} />)}
+            <div className="paginationButton">
+              {!isLoading && itemsData?.length && (
                 <img src={paginationButton} alt="paginationButton" />
-              ) : null}
+              )}
             </div>
           </div>
         </div>

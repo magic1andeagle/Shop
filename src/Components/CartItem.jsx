@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../styles/pages/Cart.css";
-import Counter from "../Components/Counter";
+import Counter from "./UI/Counter";
 import { observer } from "mobx-react-lite";
 
-import CartState from "../States/CartState";
 import { Assets } from "../utils/assets";
 import { useDispatch, useSelector } from "react-redux";
 import { addedItemsSlice } from "../store/reducers/addedItemsReducer";
@@ -14,13 +13,11 @@ const CartItem = observer(({ id }) => {
   const { deleteFromCart } = addedItemsSlice.actions;
   const [currentQuantity, setCurrentQuantity] = useState(1);
   const { cancelClose } = Assets;
-  // const { cartItems } = CartState;
   const { title, price, data, image, category } = cartItems.find(
     (item) => item.id === id
   );
 
   const getCurrentNumber = (currentValue) => {
-    console.log(cartItems[0].price * currentQuantity);
     setCurrentQuantity(currentValue);
   };
 
@@ -28,7 +25,7 @@ const CartItem = observer(({ id }) => {
 
   useEffect(() => {
     setTotalItemPrice(price * currentQuantity);
-  }, [currentQuantity]);
+  }, [currentQuantity, price]);
 
   return (
     <div className="cart-item">
@@ -54,6 +51,7 @@ const CartItem = observer(({ id }) => {
           src={cancelClose}
           onClick={() => dispatch(deleteFromCart(id))}
           className="delete-cart-item-button"
+          alt=""
         ></img>
       </div>
     </div>

@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import magnifier from "../assets/magnifier.svg";
+import magnifier from "../../assets/magnifier.svg";
 
-import "../styles/components/SearchQuery.css";
-import { useSearch } from "../hooks/useSearch";
-import { useSelector } from "react-redux";
+import "../../styles/components/SearchQuery.css";
+import { useSearch } from "../../hooks/useSearch";
 
 const SearchQuery = () => {
   const [value, setValue] = useState("");
@@ -27,6 +26,7 @@ const SearchQuery = () => {
         onClick={() => onMagnifierClick()}
         className="search-query-magnifier"
         src={magnifier}
+        alt=""
       ></img>
     </div>
   );

@@ -18,6 +18,9 @@ export const itemsSlice = createSlice({
   reducers: {
     setInitialItems(state, action) {
       state.initialItems = action.payload;
+      if (!state.filteredItems?.length) {
+        state.filteredItems = action.payload;
+      }
     },
     setActiveCategories(state, action) {
       if (!state.activeCategories.includes(action.payload)) {
@@ -76,7 +79,6 @@ export const itemsSlice = createSlice({
     },
     setSearchedItems(state, action) {
       state.searchedItems = action.payload;
-      state.filteredItems = action.payload;
     },
     setFilteredItems(state, action) {
       state.filteredItems = action.payload;

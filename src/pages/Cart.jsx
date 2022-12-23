@@ -21,10 +21,7 @@ const Cart = observer(() => {
     <div className="cart">
       <div className="cart-container">
         <div className="cart-main-section">
-          <p
-            style={{ color: "gray", cursor: "pointer" }}
-            onClick={() => navigate("/")}
-          >
+          <p className="backToShop" onClick={() => navigate("/")}>
             Back to shop
           </p>
           <div className="cart-header">

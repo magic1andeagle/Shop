@@ -1,6 +1,5 @@
 import React from "react";
 import FavouriteItem from "../Components/FavouriteItem";
-import FavouritesState from "../States/FavouritesState";
 
 import "../styles/pages/Favourite.css";
 import { observer } from "mobx-react-lite";
@@ -12,16 +11,12 @@ const Favourites = observer(() => {
   const dispatch = useDispatch();
   const { favouriteItems } = useSelector((state) => state.addedItems);
   const { clearFavourites } = addedItemsSlice.actions;
-  //const { favouriteItems } = FavouritesState;
   const navigate = useNavigate();
 
   return (
     <div className="favourites-page">
       <div className="favourites-wrapper">
-        <p
-          style={{ color: "gray", cursor: "pointer" }}
-          onClick={() => navigate("/")}
-        >
+        <p className="backToShop" onClick={() => navigate("/")}>
           Back to shop
         </p>
         <div
@@ -32,14 +27,16 @@ const Favourites = observer(() => {
           }}
         >
           <h1 style={{ fontSize: 36 }}>Favourite Items</h1>
-          <p style={{ color: "gray" }}>{favouriteItems.length} items</p>
+          <div>
+            <p style={{ color: "gray" }}>{favouriteItems.length} items</p>
+            <button onClick={() => dispatch(clearFavourites())}>
+              Очистить избранное
+            </button>
+          </div>
         </div>
         {favouriteItems.map((item) => (
           <FavouriteItem key={item.id} data={item} />
         ))}
-        <button onClick={() => dispatch(clearFavourites())}>
-          Очистить избранное
-        </button>
       </div>
     </div>
   );

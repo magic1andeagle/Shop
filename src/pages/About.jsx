@@ -11,25 +11,26 @@ const About = () => {
     <div className="about">
       <div className="about-container">
         <p
+          className="backToShop"
           style={{ color: "gray", cursor: "pointer" }}
           onClick={() => navigate("/")}
         >
           Back to shop
         </p>
-        <h1 style={{ fontSize: 36 }}>О магазине</h1>
+        <h1 style={{ fontSize: 36 }}>About us</h1>
         <div className="about-main">
           <div className="about-buttons-wrapper">
             <button className="about-button">
-              <img src={earth}></img>
-              <p>О нас</p>
+              <img src={earth} alt=""></img>
+              <p>About the shop</p>
             </button>
             <button className="about-button">
-              <img src={graphLineUp}></img>
-              <p>Карьера</p>
+              <img src={graphLineUp} alt=""></img>
+              <p>Work with us</p>
             </button>
             <button className="about-button">
-              <img src={email}></img>
-              <p>Сотрудничество</p>
+              <img src={email} alt=""></img>
+              <p>For commercial offers</p>
             </button>
           </div>
         </div>

@@ -11,12 +11,12 @@ const Navbar = () => {
       <div className="navbar_container">
         <Link
           className={`${
-            route.pathname == "/" ? "active_page" : null
+            route.pathname === "/" ? "active_page" : null
           } nav_item /`}
           to="/"
         >
           <img alt="" src={catalog}></img>
-          <p>Ассортимент</p>
+          <p>Home page</p>
         </Link>
         <Link
           className={`${
@@ -25,7 +25,7 @@ const Navbar = () => {
           to="/cart"
         >
           <img alt="" src={shoppingCartBlack}></img>
-          <p>Корзина</p>
+          <p>Cart</p>
         </Link>
         <Link
           className={`${
@@ -34,13 +34,17 @@ const Navbar = () => {
           to="/favourites"
         >
           <img alt="" src={favourites}></img>
-          <p>Избранное</p>
+          <p>Favourites</p>
         </Link>
-        <Link className={`${
+        <Link
+          className={`${
             route.pathname == "/about" ? "active_page" : null
-          } nav_item /about`} to="/about" style={{marginRight: 0}}>
+          } nav_item /about`}
+          to="/about"
+          style={{ marginRight: 0 }}
+        >
           <img alt="" src={contacts}></img>
-          <p>Контакты</p>
+          <p>About</p>
         </Link>
       </div>
     </div>

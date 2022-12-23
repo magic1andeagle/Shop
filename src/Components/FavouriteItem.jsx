@@ -1,16 +1,13 @@
 import React from "react";
-import FavouritesState from "../States/FavouritesState";
 import { Assets } from "../utils/assets";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addedItemsSlice } from "../store/reducers/addedItemsReducer";
 
 const FavouriteItem = ({ data }) => {
   const dispatch = useDispatch();
-  const { favouriteItems } = useSelector((state) => state.addedItems);
   const { deleteFromFavourite } = addedItemsSlice.actions;
-  const { removeFavourite } = FavouritesState;
   const { favouritesItem } = Assets;
-  const { title, price, image, category, id } = data;
+  const { title, price, image, id } = data;
 
   return (
     <div className="favourite-item">

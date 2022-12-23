@@ -1,5 +1,7 @@
 .items-wrapper {
+    display: flex;
     width: 1920px;
+    justify-content: space-between;
     margin-top: 20px;
 }
 
@@ -31,6 +33,18 @@
     display: flex;
     width: 100%;
     flex-wrap: wrap;
+}
+
+.items-main-nothing {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.paginationButton {
+    display: flex;
+    width: 100%;
+    justify-content: center;
 }
 
 /* Card Item */
@@ -94,12 +108,19 @@
     color: #293241
 }
 
+.item_data_wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+
 .item-title {
     font-size: 20px;
     font-weight: 700;
     line-height: 20px;
     word-wrap: break-word;
-    color: #293241
+    color: #293241;
+    margin-bottom: 10pxs;
 }
 
 .item-price {
@@ -176,6 +197,7 @@
 .itemHoriz-info {
     display: flex;
     height: 100%;
+    margin-top: 15px;
 }
 
 .itemHoriz-charcs:nth-child(1n) {
@@ -191,8 +213,22 @@
     margin-right: 30px;
 }
 
+.itemHoriz-price {
+    font-size: 20px;
+    font-weight: 600;
+}
+
 .itemHoriz-title {
     font-size: 24px;
+}
+
+.itemHoriz_star {
+    height: 100%;
+    padding-left: 5px;
+}
+
+.item_cart {
+    margin-left: 13px;
 }
 
 .itemHoriz-photo-container {

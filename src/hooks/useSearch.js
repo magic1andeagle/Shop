@@ -15,6 +15,9 @@ export const useSearch = (searchQuery) => {
     setTimeout(() => {
       if (!searchQuery.length) {
         dispatch(setSearchedItems([]));
+        if (!areFiltersSet && !categoryItems.length) {
+          dispatch(setFilteredItems(items));
+        }
         return;
       }
       if (areFiltersSet) {
@@ -22,6 +25,7 @@ export const useSearch = (searchQuery) => {
           item.title.toLowerCase().includes(searchQuery.toLowerCase())
         );
         dispatch(setSearchedItems(data));
+        dispatch(setFilteredItems(data));
         return;
       }
       if (categoryItems?.length) {
@@ -29,11 +33,13 @@ export const useSearch = (searchQuery) => {
           item.title.toLowerCase().includes(searchQuery.toLowerCase())
         );
         dispatch(setSearchedItems(data));
+        dispatch(setFilteredItems(data));
       } else {
         const data = items?.filter((item) =>
           item.title.toLowerCase().includes(searchQuery.toLowerCase())
         );
         dispatch(setSearchedItems(data));
+        dispatch(setFilteredItems(data));
       }
     }, 0);
   }, [searchQuery]);

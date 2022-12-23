@@ -1,15 +1,14 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { itemsAPI } from "../services/ItemService";
 import SliderWrapper from "./SliderWrapper";
 import "../styles/components/Categories.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { itemsSlice } from "../store/reducers/itemsReducer";
 
 const SidebarMenu = () => {
   const { data: categoriesData } = itemsAPI.useFetchCategoriesQuery();
   const { data: initItems } = itemsAPI.useFetchItemsQuery();
   const dispatch = useDispatch();
-  const { searchedItems, categoryItems } = useSelector((state) => state.items);
   const {
     setActiveCategories,
     setCategoryItems,
@@ -74,7 +73,7 @@ const SidebarMenu = () => {
     <div className="sidebar_menu">
       <div className="sidebar_wrapper">
         <div style={{ marginBottom: "6px" }} className="categories_menu">
-          <p style={{ marginBottom: "10px" }}>Категории</p>
+          <p style={{ marginBottom: "10px" }}>Categories</p>
           {categoriesData?.length &&
             categoriesData.map((category) => (
               <div
@@ -91,7 +90,7 @@ const SidebarMenu = () => {
           ratingSettings={ratingSettings}
         />
         <button onClick={() => onSubmit()} className="applyButton">
-          <p>Найти</p>
+          <p>Search</p>
         </button>
       </div>
     </div>

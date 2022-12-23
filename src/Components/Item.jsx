@@ -1,15 +1,17 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ItemState from "../States/ItemState";
 import { addedItemsSlice } from "../store/reducers/addedItemsReducer";
 import { Assets } from "../utils/assets";
 
 const Item = observer(({ data }) => {
   const dispatch = useDispatch();
   const { cardType } = useSelector((state) => state.items);
+  const { cartItems, favouriteItems } = useSelector(
+    (state) => state.addedItems
+  );
   const { addToCart, addToFavourite } = addedItemsSlice.actions;
-  const { title, price, image, rating } = data;
+  const { title, price, image, rating, id } = data;
   const { favouritesItem, shoppingCart, star } = Assets;
 
   return (
@@ -18,35 +20,39 @@ const Item = observer(({ data }) => {
         <div className="itemHoriz">
           <div className="itemHoriz-container">
             <img
-              onClick={() => dispatch(addToFavourite(data))}
+              onClick={() => {
+                if (favouriteItems.some((item) => item.id === id)) {
+                  alert("Товар уже добавлен в избранное");
+                  return;
+                }
+                dispatch(addToFavourite(data));
+              }}
               className="like-item"
               src={favouritesItem}
+              alt=""
             />
             <div className="itemHoriz-photo-container">
-              <img src={image} />
+              <img src={image} alt="" />
             </div>
             <div className="itemHoriz-data-container">
               <div className="itemHoriz-data">
                 <p className="itemHoriz-title">{title}</p>
-                <div className="itemHoriz-info" style={{ marginTop: 15 }}>
+                <div className="itemHoriz-info">
                   <div className="itemHoriz-charcs">
-                    <p style={{ fontSize: 20, fontWeight: 600 }}>Price</p>
+                    <p className="itemHoriz-price">Price</p>
                     <p>{price}$</p>
                   </div>
                   <div className="itemHoriz-charcs">
                     <p>Rating</p>
                     <div>
                       <p
+                        className="itemHoriz_rating"
                         style={{
                           color: rating.rate <= 2.5 ? "#EE6C4D" : "#4DEE5D",
                         }}
                       >
                         {rating.rate}
-                        <img
-                          style={{ paddingLeft: 5, height: "100%" }}
-                          src={star}
-                          alt=""
-                        />
+                        <img className="itemHoriz_star" src={star} alt="" />
                       </p>
                     </div>
                   </div>
@@ -59,10 +65,16 @@ const Item = observer(({ data }) => {
               <div className="itemHoriz-buttons-wrapper">
                 <button
                   className="itemHoriz-button"
-                  onClick={() => dispatch(addToCart(data))}
+                  onClick={() => {
+                    if (cartItems.some((item) => item.id === id)) {
+                      alert("Товар уже добавлен в корзину");
+                      return;
+                    }
+                    dispatch(addToCart(data));
+                  }}
                 >
                   Add to cart
-                  <img style={{ marginLeft: 13 }} src={shoppingCart}></img>
+                  <img className="item_cart" alt="" src={shoppingCart}></img>
                 </button>
               </div>
             </div>
@@ -73,41 +85,46 @@ const Item = observer(({ data }) => {
           <div className="item-container">
             <div>
               <img
-                onClick={() => dispatch(addToFavourite(data))}
+                onClick={() => {
+                  if (favouriteItems.some((item) => item.id === id)) {
+                    alert("Товар уже добавлен в избранное");
+                    return;
+                  }
+                  dispatch(addToFavourite(data));
+                }}
                 className="like-item"
                 src={favouritesItem}
+                alt=""
               />
               <div className="item-photo">
-                <img src={image} />
+                <img src={image} alt="" />
               </div>
             </div>
             <div>
-              <p className="item-title" style={{ marginBottom: 10 }}>
-                {title}
-              </p>
+              <p className="item-title">{title}</p>
             </div>
 
             <div className="item-data">
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  paddingBottom: 10,
-                }}
-              >
+              <div className="item_data_wrapper">
                 <p>{price}$</p>
                 <div style={{ display: "flex" }}>
-                  <img src={star} alt={star} />
+                  <img src={star} alt="" />
                   <p style={{ margin: 0, paddingLeft: 5 }}>{rating.rate}</p>
                 </div>
               </div>
               <div className="button-wrapper">
                 <button
                   className="item-button"
-                  onClick={() => dispatch(addToCart(data))}
+                  onClick={() => {
+                    if (cartItems.some((item) => item.id === id)) {
+                      alert("Товар уже добавлен в корзину");
+                      return;
+                    }
+                    dispatch(addToCart(data));
+                  }}
                 >
                   Add to cart
-                  <img style={{ marginLeft: 13 }} src={shoppingCart}></img>
+                  <img className="item_cart" src={shoppingCart} alt=""></img>
                 </button>
               </div>
             </div>
